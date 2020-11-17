@@ -5,5 +5,11 @@
   text-align: center;
   td {
     color: $color4;
+    padding: 10px;
+  }
+
+  &__input {
+    font-size: $xsmall;
+    padding: 10px;
   }
 }
