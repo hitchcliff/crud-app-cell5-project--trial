@@ -71,15 +71,7 @@ const TableRows = ({ clients }: ITableRows): JSX.Element => {
 
   // Simply map the clients array from the server
   const mappingClients = data?.map((client: Client, index: number) => {
-    const {
-      id,
-      gender,
-      first_name,
-      last_name,
-      mobile_number,
-      bills,
-      paid,
-    } = client;
+    const { id, gender, paid } = client;
     return (
       <tr
         key={index}
@@ -111,10 +103,24 @@ const TableRows = ({ clients }: ITableRows): JSX.Element => {
 
         {/* delete, update, and toggle complete */}
         <td className={styles.body__actions}>
-          <button onClick={() => onEdit(id, 'edit')}>
-            {currentIndex === id ? 'save' : 'edit'}
+          <button
+            className={currentIndex === id ? styles.save : styles.edit}
+            onClick={() => onEdit(id, 'edit')}
+          >
+            E
           </button>
-          <button onClick={() => onEdit(id, 'delete')}>delete</button>
+          <button
+            className={styles.delete}
+            onClick={() => onEdit(id, 'delete')}
+          >
+            D
+          </button>
+          <button
+            className={paid ? styles.paid : styles.unPaid}
+            onClick={() => onEdit(id, 'complete')}
+          >
+            C
+          </button>
         </td>
       </tr>
     );

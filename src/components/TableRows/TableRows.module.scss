@@ -6,7 +6,7 @@
 
   td {
     color: $color4;
-    padding: 10px;
+    padding: 15px;
   }
 
   &__input {
@@ -18,6 +18,32 @@
     display: flex;
     flex-direction: row;
     grid-gap: 5px;
+    justify-content: center;
+    align-items: center;
+
+    // buttons styles
+    .edit,
+    .save,
+    .delete,
+    .paid,
+    .unPaid {
+      padding: 7px;
+    }
+    .edit {
+      background: lightgreen;
+    }
+    .save {
+      background: lightyellow;
+    }
+    .delete {
+      background: orangered;
+    }
+    .paid {
+      background: lightsalmon;
+    }
+    .unpaid {
+      background: lightcoral;
+    }
   }
 }
 

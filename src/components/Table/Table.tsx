@@ -8,6 +8,7 @@ import { RootStore } from '../../Store';
 // action creators
 import { ClientsAction } from '../../Actions/clients.action';
 import TableRows from '../TableRows/TableRows';
+import Buttons from '../Buttons/Buttons';
 
 /**
  * Functional react component for congratulatory message.
@@ -53,6 +54,7 @@ const Table = (props: any) => {
           <TableRows clients={clients} />
         </tbody>
       </table>
+      <Buttons text="See more (10)" isPrimary />
     </div>
   );
 };

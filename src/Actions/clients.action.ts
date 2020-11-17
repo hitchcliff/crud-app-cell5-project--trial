@@ -42,7 +42,6 @@ export interface Client {
   mobile_number: string;
   bills: number;
   paid: boolean;
-  isPaid: number;
 }
 
 export type ClientsActionDispatchTypes = FetchClients;
