@@ -1,3 +1,26 @@
+@import '../../styles/global';
 .table {
   padding: 0 50px;
+  &__container {
+    width: 100%;
+
+    // this is the head of our table
+    .headers {
+      text-align: center;
+      background: $color5;
+      th {
+        padding: 10px;
+        color: $color4;
+      }
+    }
+
+    // this is the body of our table
+    // the content are styled here
+    .body {
+      text-align: center;
+      td {
+        color: $color4;
+      }
+    }
+  }
 }

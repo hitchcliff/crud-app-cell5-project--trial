@@ -1,17 +1,14 @@
 import {
   ListingProperty,
   ClientsActionDispatchTypes,
-  FETCH_CLIENTS_LOADING,
-  FETCH_CLIENTS_SUCCESS,
-  FETCH_CLIENTS_FAILED,
+  FETCH_CLIENTS,
 } from '../../Actions/clients.action';
 
-export const initialState: IClientsReducerProp = {};
-
-interface IClientsReducerProp {
-  state?: ListingProperty;
-  loading?: boolean;
-}
+// seems to be having problems with TS and Connect
+// This is just a workaround without using useSelectors hooks
+export const initialState: ListingProperty = {
+  clients: [],
+};
 
 /**
  * Reducer that pushes `payload` into store
@@ -23,23 +20,8 @@ export const ClientsReducer = (
   action: ClientsActionDispatchTypes
 ) => {
   switch (action.type) {
-    case FETCH_CLIENTS_LOADING: {
-      return {
-        ...state,
-        loading: true,
-      };
-    }
-    case FETCH_CLIENTS_SUCCESS: {
-      return {
-        ...state,
-        state: action.payload,
-      };
-    }
-
-    case FETCH_CLIENTS_FAILED: {
-      return {
-        loading: false,
-      };
+    case FETCH_CLIENTS: {
+      return action.payload;
     }
     default:
       return state;
