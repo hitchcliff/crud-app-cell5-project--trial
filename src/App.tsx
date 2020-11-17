@@ -12,8 +12,8 @@ const App = () => {
           <Sidebar />
         </div>
         <div className="container__overview">
-          <Table />
           <Overview />
+          <Table />
         </div>
       </div>
     </div>

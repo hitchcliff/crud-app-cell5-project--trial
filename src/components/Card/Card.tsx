@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Card.module.scss';
+import PropTypes from 'prop-types';
 
 interface ICardsProp {
   title: string;
@@ -13,7 +14,7 @@ interface ICardsProp {
  */
 const Card = ({ title, value }: ICardsProp) => {
   return (
-    <div className={styles.cards}>
+    <div className={styles.card}>
       <h5 className={styles.cards__title}>{title}</h5>
       <p className={styles.cards__value}>
         {/* checks whether the title is billings */}
@@ -22,4 +23,11 @@ const Card = ({ title, value }: ICardsProp) => {
     </div>
   );
 };
+
+// Proptypes
+Card.propTypes = {
+  title: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
 export default Card;

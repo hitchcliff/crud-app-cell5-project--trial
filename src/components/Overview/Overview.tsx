@@ -33,9 +33,11 @@ const Overview = () => {
       {/* cards components that accepts title and value as props */}
       <div className={styles.cards}>
         <h2 className={styles.cards__title}>Overview</h2>
-        <Card title="Persons" value={50} />
-        <Card title="Billings" value={500} />
-        <Card title="Completed" value={25} />
+        <div className={styles.cards__container}>
+          <Card title="Persons" value={50} />
+          <Card title="Billings" value={500} />
+          <Card title="Completed" value={25} />
+        </div>
       </div>
     </div>
   );

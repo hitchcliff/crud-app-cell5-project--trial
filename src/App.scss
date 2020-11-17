@@ -65,6 +65,7 @@ h1 {
 }
 
 h2 {
+  font-size: $large;
 }
 
 h3 {
@@ -72,6 +73,10 @@ h3 {
 }
 
 h4 {
+  font-size: $medium;
+}
+
+h5 {
   font-size: $medium;
 }
 

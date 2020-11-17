@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Buttons.module.scss';
+import PropTypes from 'prop-types';
 
 interface IButtonsProp {
   isLink?: boolean;
@@ -37,6 +38,13 @@ const Buttons = ({
   );
 };
 
-Buttons.propTypes = {};
+// Proptypes
+Buttons.propTypes = {
+  link: PropTypes.string,
+  text: PropTypes.string.isRequired,
+  isPrimary: PropTypes.bool,
+  isLink: PropTypes.bool,
+  isTypeSubmit: PropTypes.bool,
+};
 
 export default Buttons;

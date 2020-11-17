@@ -82,7 +82,7 @@
     ],
     "indent": [true, "spaces", 2],
     "trailing-comma": [
-      true,
+      false,
       {
         "multiline": "always",
         "singleline": "never"
