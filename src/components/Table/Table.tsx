@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Table.module.scss';
 
 // redux
@@ -6,18 +6,20 @@ import { connect } from 'react-redux';
 import { RootStore } from '../../Store';
 
 // action creators
-import { Client, ClientsAction } from '../../Actions/clients.action';
-import ListingActions from '../ListingActions/ListingActions';
+import { ClientsAction } from '../../Actions/clients.action';
+import TableRows from '../TableRows/TableRows';
 
 /**
  * Functional react component for congratulatory message.
  * @function
- * @returns {JSX.Element} - Rendered component (or null if `success` prop is missing)
+ * @returns {JSX.Element} - Rendered component (o null if `success` prop is missing)
  */
 const Table = (props: any) => {
   // ClientsAction creators `must not` be used here
   // Shadow variable gives out error
-  const { listings } = props;
+  const {
+    listings: { clients },
+  } = props;
 
   // temporarily run the action
   useEffect(() => {
@@ -29,33 +31,11 @@ const Table = (props: any) => {
     };
   }, []);
 
-  // Simply map the clients array from the server
-  const mappingClients = listings.clients?.map(
-    (client: Client, index: number) => {
-      return (
-        <tr key={index} className={styles.body}>
-          <td>{index}</td>
-          <td>{client.gender}</td>
-          <td>{client.first_name}</td>
-          <td>{client.last_name}</td>
-          <td>{client.mobile_number}</td>
-          <td>${client.bills}</td>
-
-          {/* actions has a special logic involved */}
-          {/* each and every rows have 3 buttons */}
-          {/* delete, update, and toggle complete */}
-          <td className={styles.body__actions}>
-            <ListingActions />
-          </td>
-        </tr>
-      );
-    }
-  );
-
   return (
     <div className={styles.table}>
       <table className={styles.table__container}>
         <tbody>
+          {/* These are the Main headers of the Table */}
           <tr className={styles.headers}>
             <th>ID</th>
             <th>Gender</th>
@@ -65,7 +45,12 @@ const Table = (props: any) => {
             <th>Bills</th>
             <th>Actions</th>
           </tr>
-          {listings.clients.length ? mappingClients : null}
+
+          {/* this component has a complicated logic involved */}
+          {/* each and every rows have 3 buttons */}
+          {/* delete, update, and toggle complete */}
+          {/* a good reason to detach this into small component */}
+          <TableRows clients={clients} />
         </tbody>
       </table>
     </div>
@@ -77,4 +62,5 @@ const mapStateToProps = (state: RootStore) => {
     listings: state.listings,
   };
 };
+
 export default connect(mapStateToProps, { ClientsAction })(Table);

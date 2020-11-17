@@ -1,0 +1,9 @@
+@import '../../styles/global';
+// this is the body of our table
+// the content are styled here
+.body {
+  text-align: center;
+  td {
+    color: $color4;
+  }
+}
