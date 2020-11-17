@@ -7,6 +7,7 @@ import { RootStore } from '../../Store';
 
 // action creators
 import { Client, ClientsAction } from '../../Actions/clients.action';
+import ListingActions from '../ListingActions/ListingActions';
 
 /**
  * Functional react component for congratulatory message.
@@ -40,21 +41,11 @@ const Table = (props: any) => {
           <td>{client.mobile_number}</td>
           <td>${client.bills}</td>
 
-          {/* our actions has a special logic involved */}
+          {/* actions has a special logic involved */}
           {/* each and every rows have 3 buttons */}
-          {/* delete, update, and edit */}
+          {/* delete, update, and toggle complete */}
           <td className={styles.body__actions}>
-            <ul>
-              <li>
-                <button>1</button>
-              </li>
-              <li>
-                <button>2</button>
-              </li>
-              <li>
-                <button>3</button>
-              </li>
-            </ul>
+            <ListingActions />
           </td>
         </tr>
       );
