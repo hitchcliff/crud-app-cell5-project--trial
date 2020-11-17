@@ -1,6 +1,9 @@
 @import '../../styles/global';
 .target {
   margin-top: $smallSeparator;
+  h4 {
+    margin-bottom: 10px;
+  }
   form {
     .group {
       display: flex;
