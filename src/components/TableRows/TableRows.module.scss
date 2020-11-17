@@ -3,6 +3,7 @@
 // the content are styled here
 .body {
   text-align: center;
+
   td {
     color: $color4;
     padding: 10px;
@@ -10,6 +11,19 @@
 
   &__input {
     font-size: $xsmall;
-    padding: 10px;
+    padding: 5px;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: row;
+    grid-gap: 5px;
+  }
+}
+
+.body[data-color='completed'] {
+  background: $color3;
+  td {
+    color: $color1;
   }
 }

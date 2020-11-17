@@ -1,14 +1,38 @@
 @import '../../styles/global';
 .table {
   padding: 0 50px;
+  padding-right: 40px;
+  max-height: 400px;
+  overflow-y: scroll;
+
+  // overflow
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 5px;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar {
+      background: white;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: $color3;
+      border-radius: 10px;
+    }
+  }
+
   &__container {
     width: 100%;
+    position: relative;
 
     // this is the head of our table
     .headers {
       text-align: center;
-      background: $color5;
+      position: relative;
       th {
+        background-color: $color5;
+        position: sticky;
+        top: 0;
         padding: 10px;
         color: $color4;
       }
