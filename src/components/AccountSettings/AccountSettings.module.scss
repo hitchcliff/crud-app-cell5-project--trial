@@ -1,0 +1,15 @@
+@import '../../styles/global';
+.header {
+  background: $color5;
+  padding: 10px 20px;
+  &__container {
+    display: flex;
+    flex-direction: row;
+    grid-gap: 20px;
+    button {
+      background: none;
+      color: white;
+      font-size: $small;
+    }
+  }
+}

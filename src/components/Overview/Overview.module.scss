@@ -1,0 +1,23 @@
+@import '../../styles/global';
+.overview {
+  width: 100%;
+  padding: 50px;
+
+  .heading {
+    display: flex;
+    flex-direction: row;
+    grid-gap: 50px;
+    &__summary {
+      margin-bottom: $mediumSeparator;
+      // no `BEM` selector but this should be find since we're using Preprocessors
+      h3 {
+        color: white;
+        margin-bottom: $smallSeparator;
+      }
+
+      p {
+        color: $color4;
+      }
+    }
+  }
+}

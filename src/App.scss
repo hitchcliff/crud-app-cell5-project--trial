@@ -19,25 +19,23 @@ body {
   // we might add light version in the future
   &[data-theme='dark'] {
     background: $color1;
-  }
+    .container {
+      padding: 80px 0;
+      height: 80%;
+      width: 80%;
+      display: flex;
+      flex-direction: row;
+      margin: auto;
 
-  .container {
-    padding: 80px 0;
-    height: 80%;
-    width: 80%;
-    display: grid;
-    grid-template-columns: 3fr 7fr; /*layout*/
-    margin: auto;
+      &__sidebar {
+        width: 30%;
+        background: $color2;
+        padding: 50px;
+      }
 
-    &__sidebar {
-      width: 100%;
-      background: $color2;
-      padding: 50px;
-    }
-
-    &__overview {
-      width: 100%;
-      background: $color1;
+      &__overview {
+        width: 70%;
+      }
     }
   }
 }
@@ -52,6 +50,10 @@ input:focus {
   outline: none;
 }
 
+button {
+  cursor: pointer;
+}
+
 // ************* Generic Input
 input {
   font-size: $small;
@@ -60,6 +62,13 @@ input {
 // ************* Generic Heading Sizes
 h1 {
   font-size: $large;
+}
+
+h2 {
+}
+
+h3 {
+  font-size: $medium;
 }
 
 h4 {

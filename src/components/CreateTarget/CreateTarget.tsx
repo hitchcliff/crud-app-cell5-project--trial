@@ -46,7 +46,7 @@ const CreateTarget = () => {
             type="text"
             placeholder="$ `Bills`"
           />
-          <Buttons isTypeSubmit={true} text="Submit" />
+          <Buttons isTypeSubmit text="Submit" />
         </div>
       </form>
     </div>
