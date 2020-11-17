@@ -3,3 +3,40 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+@import './styles/global';
+body {
+  font-family: $font;
+  font-size: 100%;
+}
+
+.App {
+  min-height: 100vh;
+  height: 100vh;
+  display: flex; /*to use margin: `auto` to center child nodes */
+  flex-direction: column;
+
+  // we might add light version in the future
+  &[data-theme='dark'] {
+    background: $color1;
+  }
+
+  .container {
+    height: 80%;
+    width: 80%;
+    display: grid;
+    grid-template-columns: 3fr 7fr; /*layout*/
+    margin: auto;
+
+    &__sidebar {
+      width: 100%;
+      background: $color2;
+      padding: 50px;
+    }
+
+    &__overview {
+      width: 100%;
+      background: $color1;
+    }
+  }
+}

@@ -6,13 +6,15 @@ import { Overview, Sidebar, Table } from './components';
 
 const App = () => {
   return (
-    <div className="App">
-      <div className="col col--sidebar">
-        <Sidebar />
-      </div>
-      <div className="col col--overview">
-        <Table />
-        <Overview />
+    <div className="App" data-theme="dark">
+      <div className="container">
+        <div className="container__sidebar">
+          <Sidebar />
+        </div>
+        <div className="container__overview">
+          <Table />
+          <Overview />
+        </div>
       </div>
     </div>
   );
