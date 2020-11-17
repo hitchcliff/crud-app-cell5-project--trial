@@ -26,6 +26,7 @@
       }
     ],
     "no-arg": true,
+    "no-angle-bracket-type-assertion": false,
     "no-bitwise": true,
     "no-console": true,
     "no-construct": true,

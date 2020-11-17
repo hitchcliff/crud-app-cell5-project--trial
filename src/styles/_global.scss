@@ -1,16 +1,28 @@
-// Font family
+// ************* Font family
 $font: 'Karla', Arial, sans-serif, calibri;
 
-// Font sizes
-$xsmall: 1.1rem;
-$small: 1.5rem;
-$medium: 2rem;
+// ************* Font sizes
+$xsmall: 0.9rem;
+$small: 1.2rem;
+$medium: 1.5rem;
 $large: 2.5rem;
 $xlarge: 3rem;
 
-// Colors
+// ************* Colors
 $color1: #2e3532; /*main background*/
 $color2: #d2d4c8; /*sidebar*/
-$color3: #d3efbd; /*boxes*/
+$color3: #d3efbd; /*overview*/
 $color4: #e0e2db; /*inputs*/
 $color5: #8b2635; /*buttons etc*/
+
+// ************* Separator
+// ******* these value is used to add spacings between elements
+$smallSeparator: 30px;
+$mediumSeparator: 60px;
+
+// ************* Box Shadow
+$boxShadow: 0px 10px 30px 5px
+  rgba(
+    $color: $color5,
+    $alpha: 0.45,
+  );

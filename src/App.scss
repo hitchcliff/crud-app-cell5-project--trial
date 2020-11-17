@@ -12,7 +12,7 @@ body {
 
 .App {
   min-height: 100vh;
-  height: 100vh;
+  height: 100%;
   display: flex; /*to use margin: `auto` to center child nodes */
   flex-direction: column;
 
@@ -39,4 +39,32 @@ body {
       background: $color1;
     }
   }
+}
+
+// ************** Generic Buttons & Inputs
+button,
+button:focus,
+button:visited,
+input,
+input:focus {
+  border: none;
+  outline: none;
+}
+
+// ************* Generic Input
+input {
+  font-size: $small;
+}
+
+// ************* Generic Heading Sizes
+h1 {
+  font-size: $large;
+}
+
+h4 {
+  font-size: $medium;
+}
+
+p {
+  font-size: $small;
 }

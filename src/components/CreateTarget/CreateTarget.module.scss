@@ -1,0 +1,17 @@
+@import '../../styles/global';
+.target {
+  margin-top: $smallSeparator;
+  form {
+    .group {
+      display: flex;
+      flex-direction: row;
+      &__input {
+        margin: 5px;
+        padding: 15px;
+      }
+      button {
+        margin: 5px;
+      }
+    }
+  }
+}

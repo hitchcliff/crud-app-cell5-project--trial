@@ -1,0 +1,9 @@
+@import '../../styles/global';
+.search {
+  margin-top: $mediumSeparator;
+  &__input {
+    width: 100%;
+    padding: 12px 20px;
+    background: $color4;
+  }
+}

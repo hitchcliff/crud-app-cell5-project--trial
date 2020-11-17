@@ -1,0 +1,28 @@
+@import '../../styles/global';
+.sorting {
+  margin-top: $smallSeparator;
+  h4 {
+    margin-bottom: 10px;
+  }
+  .boxes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    .box {
+      background: $color4;
+      padding: 30px;
+
+      // to center the content
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+
+      &__switch {
+        margin-top: 5px;
+        padding: 10px;
+        background: $color1;
+      }
+    }
+  }
+}
