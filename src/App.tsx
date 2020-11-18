@@ -3,6 +3,7 @@ import './App.scss';
 
 // main components
 import { Overview, Sidebar, Table } from './components';
+import Buttons from './components/Buttons/Buttons';
 
 const App = () => {
   return (
@@ -14,6 +15,9 @@ const App = () => {
         <div className="container__overview">
           <Overview />
           <Table />
+          <div className="overview__button">
+            <Buttons isPrimary text="See more (1)" />
+          </div>
         </div>
       </div>
     </div>

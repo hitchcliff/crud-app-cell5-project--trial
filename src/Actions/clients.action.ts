@@ -11,6 +11,7 @@ export const ClientsAction = () => async (
     const { data }: any = await Axios.get(
       'https://raw.githubusercontent.com/hitchcliff/fake-apis/main/cell5-crud-app.json'
     );
+
     //   if success
     dispatch({
       type: FETCH_CLIENTS,

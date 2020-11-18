@@ -36,6 +36,10 @@ body {
       &__overview {
         width: 70%;
       }
+      .overview__button {
+        padding-left: 50px;
+        margin-top: $smallSeparator;
+      }
     }
   }
 }
