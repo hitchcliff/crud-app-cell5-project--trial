@@ -2,7 +2,7 @@ import { Client } from '../../Actions/clients.action';
 
 /**
  * A helper function used to update the client state through passing an arg.
- * This is specifically made for only `1` purpose (`not reusable`)
+ * This is specifically made for `Listings` (`not reusable`)
  * @param {Client} clients - Accepts an args of type `Client[]`
  * @returns {EditableTable} - Returns an `EditableTable` type
  */

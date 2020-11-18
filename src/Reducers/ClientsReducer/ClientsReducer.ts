@@ -3,6 +3,7 @@ import { FETCH_CLIENTS, Client } from '../../Actions/clients.action';
 import { CREATE_CLIENT } from '../../Actions/create.action';
 import { DELETE_CLIENT } from '../../Actions/delete.action';
 import { SEARCH_CLIENT } from '../../Actions/search.action';
+import { SORT_CLIENT } from '../../Actions/sort.action';
 import { UPDATE_CLIENT } from '../../Actions/update.action';
 
 // helpers
@@ -74,6 +75,13 @@ export const ClientsReducer = (
     }
 
     case SEARCH_CLIENT: {
+      return {
+        ...state,
+        ...updateClientState(action.payload),
+      };
+    }
+
+    case SORT_CLIENT: {
       return {
         ...state,
         ...updateClientState(action.payload),

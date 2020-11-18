@@ -1,4 +1,5 @@
 @import '../../styles/global';
+@import '../../styles/keyframes';
 .sorting {
   margin-top: $smallSeparator;
   h4 {
@@ -19,9 +20,19 @@
       align-items: center;
 
       &__switch {
+        transition: all 0.3s ease-out;
         margin-top: 5px;
         padding: 10px;
         background: $color1;
+      }
+
+      &__switchActive {
+        transition: all 0.5s ease;
+        margin-top: 5px;
+        padding: 20px;
+        background: $color5;
+        box-shadow: 0 0 10px rgba($color: $color5, $alpha: 0.2);
+        animation: shake 0.5s infinite ease;
       }
     }
   }

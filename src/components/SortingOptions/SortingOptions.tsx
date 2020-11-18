@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { act } from 'react-dom/test-utils';
+import { useDispatch } from 'react-redux';
+import { IBoxSwitchesType } from '.';
+import { SortClientAction } from '../../Actions/sort.action';
 import { BoxSwitches } from './data';
 import styles from './SortingOptions.module.scss';
 
@@ -8,11 +12,41 @@ import styles from './SortingOptions.module.scss';
  * @returns {JSX.Element} - Rendered component (or null if `success` prop is missing)
  */
 const SortingOptions = () => {
+  const [state, set] = useState<string>('');
+  const [active, setActive] = useState<number>();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const res = setTimeout(() => {
+      dispatch(SortClientAction(state));
+    });
+    return () => {
+      clearTimeout(res);
+    };
+  }, []);
+
+  const handleClick = (id: number, item: IBoxSwitchesType) => {
+    setActive(id);
+    set(item.dsc);
+    if (active === id) {
+      setActive(id);
+      set(item.asc);
+    }
+  };
+
+  console.log(active, state);
+
   const mapBoxesSwitches = BoxSwitches.map((item) => {
     return (
       <div key={item.id} className={styles.box}>
         <p>{item.title}</p>
-        <button className={styles.box__switch} />
+        <button
+          className={
+            active === item.id ? styles.box__switchActive : styles.box__switch
+          }
+          onClick={(e) => handleClick(item.id, item)}
+        />
       </div>
     );
   });
