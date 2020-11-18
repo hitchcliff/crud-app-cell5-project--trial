@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 // actions
 import { DeleteClientAction } from '../../Actions/delete.action';
 import { UpdateClientAction } from '../../Actions/update.action';
+import { FormatNumber } from '../../helpers/helpers';
 
 interface ITableRowsProp {
   clients?: Client[];
@@ -58,13 +59,6 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
   };
 
   const onDelete = async (id: string) => {
-    /**
-     * There is a bug when deleting the `state` in `redux`.
-     * We have to loop through our data to delete the state
-     * TEMPORARY SOLUTION
-     */
-    // const newData = [...data].filter((item: Client) => item._id !== id);
-    // setData(newData);
     dispatch(DeleteClientAction(id)); // [DISPATCH]
   };
 
@@ -108,7 +102,7 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
         <td>{client.first_name}</td>
         <td>{client.last_name}</td>
         <td>{client.mobile_number}</td>
-        <td>${client.bills}</td>
+        <td>{FormatNumber(client.bills)}</td>
 
         {/* delete, update, and toggle complete */}
         <td className={styles.body__actions}>

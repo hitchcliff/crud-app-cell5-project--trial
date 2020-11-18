@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Card.module.scss';
 import PropTypes from 'prop-types';
+import { FormatNumber } from '../../helpers/helpers';
 
 interface ICardsProp {
   title: string;
@@ -18,7 +19,7 @@ const Card = ({ title, value }: ICardsProp) => {
       <h5 className={styles.cards__title}>{title}</h5>
       <p className={styles.cards__value}>
         {/* checks whether the title is billings */}
-        {title === 'Billings' ? '$' + value : value}
+        {title === 'Billings' ? FormatNumber(value) : value}
       </p>
     </div>
   );
