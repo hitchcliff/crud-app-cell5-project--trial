@@ -35,7 +35,6 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
     gender: '',
   }); // new values temporarily stored
 
-  // testing
   useEffect(() => {
     setData(clients);
   }, [clients]);
@@ -82,8 +81,6 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
       >
         <td>{index + 1}</td>
 
-        {/* If any Edit button is clicked, we then compare the `id` and `currentIndex` which was
-                set in `onEdit()` FE. Show `input` if true */}
         <td>
           {client._id === currentIndex ? (
             <input
@@ -99,25 +96,87 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
           )}
         </td>
 
-        <td>{client.first_name}</td>
-        <td>{client.last_name}</td>
-        <td>{client.mobile_number}</td>
-        <td>{FormatNumber(client.bills)}</td>
+        <td>
+          {client._id === currentIndex ? (
+            <input
+              type="text"
+              name="first_name"
+              className={styles.body__input}
+              placeholder={client.first_name}
+              value={state.first_name}
+              onChange={(e) => onChange(e)} // this is where the logic of adding new values in state
+            />
+          ) : (
+            client.first_name
+          )}
+        </td>
 
-        {/* delete, update, and toggle complete */}
+        <td>
+          {client._id === currentIndex ? (
+            <input
+              type="text"
+              name="last_name"
+              className={styles.body__input}
+              placeholder={client.last_name}
+              value={state.last_name}
+              onChange={(e) => onChange(e)} // this is where the logic of adding new values in state
+            />
+          ) : (
+            client.last_name
+          )}
+        </td>
+
+        <td>
+          {client._id === currentIndex ? (
+            <input
+              type="text"
+              name="mobile_number"
+              className={styles.body__input}
+              placeholder={client.mobile_number}
+              value={state.mobile_number}
+              onChange={(e) => onChange(e)} // this is where the logic of adding new values in state
+            />
+          ) : (
+            client.mobile_number
+          )}
+        </td>
+
+        <td>
+          {client._id === currentIndex ? (
+            <input
+              type="text"
+              name="bills"
+              className={styles.body__input}
+              placeholder={client.bills.toString()}
+              value={state.bills}
+              onChange={(e) => onChange(e)} // this is where the logic of adding new values in state
+            />
+          ) : (
+            FormatNumber(client.bills)
+          )}
+        </td>
+
         <td className={styles.body__actions}>
+          {/* Sends HTTP Request to the Server to `update` the item
+          then updates the Redux State. Dispatch actions then sent to Reducers*/}
           <button
             className={currentIndex === client._id ? styles.save : styles.edit}
             onClick={() => onEdit(client._id)}
           >
             E
           </button>
+
+          {/* Sends HTTP Request to the Server to `delete` the item
+          then updates the Redux State. Dispatch actions then sent to Reducers*/}
           <button
             className={styles.delete}
             onClick={() => onDelete(client._id)}
           >
             D
           </button>
+
+          {/* Sends HTTP Request to the Server to `complete` the item
+          then updates the Redux State. Dispatch actions then sent to Reducers*/}
           <button
             className={client.paid ? styles.paid : styles.unPaid}
             // onClick={() => handleClick(_id, 'complete')}
