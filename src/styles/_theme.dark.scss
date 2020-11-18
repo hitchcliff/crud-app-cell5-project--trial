@@ -26,3 +26,21 @@
     }
   }
 }
+
+// ************* Media Query
+@media screen and (max-width: 768px) {
+  .App[data-theme='dark'] {
+    .container {
+      flex-wrap: wrap-reverse;
+
+      &__sidebar {
+        height: auto;
+        width: 100%;
+      }
+
+      &__overview {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -37,6 +37,19 @@ body {
 // ************* Heading Media queries from `769` until `1200` only
 @import './styles/heading.media';
 
+@media screen and (max-width: 980px) {
+  .App {
+    &[data-theme='dark'] {
+      .container {
+        &__sidebar {
+          padding: 10px;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 768px) {
   .App {
     &[data-theme='dark'] {
