@@ -136,4 +136,33 @@ router.patch('/:id', async (req, res) => {
     }
 })
 
+// client is paid
+router.patch('/paid/:id', async (req, res) => {
+    try {
+       const paid = await Client.updateOne({_id: req.params.id}, 
+           {$set: {paid: true}}
+       ) 
+        res.status(200).json(paid)
+    } catch (error) {
+       res.status(500).json({
+           message: "cannot update paid of " + req.params.id
+       }) 
+    }
+})
+
+// client is upaid
+router.patch('/unpaid/:id', async (req, res) => {
+    try {
+       const unpaid = await Client.updateOne({_id: req.params.id}, {
+           $set: {paid: false}
+       }) 
+       res.status(200).json(unpaid)
+    } catch (error) {
+       res.status(500).json({
+           message: "cannot unpaid of " + req.params.id
+       })
+    }
+})
+
+
 module.exports = router

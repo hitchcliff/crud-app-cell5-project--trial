@@ -1,0 +1,15 @@
+@import './global';
+::-webkit-scrollbar {
+  width: 10px;
+  height: 5px;
+}
+
+:hover {
+  &::-webkit-scrollbar {
+    background: none;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $color5;
+    border-radius: 10px;
+  }
+}
