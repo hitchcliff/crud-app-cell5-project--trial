@@ -8,7 +8,7 @@ interface IButtonsProp {
   text: string;
   isPrimary?: boolean;
   isTypeSubmit?: boolean;
-  handleClick?: (arg: any) => void;
+  handleClick?: any;
 }
 
 /**
@@ -24,17 +24,11 @@ const Buttons = ({
   isTypeSubmit,
   handleClick,
 }: IButtonsProp) => {
-  const onSubmit = (e: React.FormEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    if (!handleClick) return;
-    handleClick('yes');
-  };
-
   return (
     <button
       type={isTypeSubmit ? 'submit' : undefined}
       className={isPrimary ? styles.primary : styles.general}
-      onSubmit={(e) => onSubmit(e)}
+      onClick={(e) => handleClick && handleClick(e)}
     >
       {/* if its link, we render `a` tag */}
       {isLink ? <a href={link}>{text}</a> : text}

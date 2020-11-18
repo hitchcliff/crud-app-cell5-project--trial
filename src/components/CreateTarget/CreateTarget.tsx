@@ -2,29 +2,42 @@ import React, { useState } from 'react';
 import styles from './CreateTarget.module.scss';
 
 import Buttons from '../Buttons/Buttons';
+
+import { connect } from 'react-redux';
+import { CreateAction } from '../../Actions/create.action';
+import { EditableTable } from '../TableRows';
 /**
  * Functional react component for congratulatory message.
  * @function
  * @returns {JSX.Element} - Rendered component (or null if `success` prop is missing)
  */
-const CreateTarget = () => {
-  const [state, set] = useState({});
+const CreateTarget = (props: any) => {
+  const [state, set] = useState<EditableTable>({
+    paid: false, // by default, newly added clients are `not` paid
+  });
 
-  const handleClick = (str: any) => {
-    console.log('from button', str);
+  const onSubmit = (e: any) => {
+    e.preventDefault();
+    props.CreateAction(state);
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.currentTarget;
-    const value = target.value;
     const name = target.name;
+    let value;
+
+    if (name === 'bills') {
+      value = parseInt(target.value);
+    } else {
+      value = target.value;
+    }
+
     set({
       ...state,
       [name]: value,
     });
   };
 
-  console.log(state);
   return (
     <div className={styles.target}>
       {/* heading */}
@@ -32,7 +45,7 @@ const CreateTarget = () => {
 
       {/* form is the wrapper. group is the one who holds our inputs*/}
       {/* group__input is the `BEM` class to each Inputs */}
-      <form>
+      <form onSubmit={(e) => onSubmit(e)}>
         <div className={styles.group}>
           <input
             className={styles.group__input}
@@ -68,15 +81,21 @@ const CreateTarget = () => {
         <div className={styles.group}>
           <input
             className={styles.group__input}
-            type="text"
+            type="number"
             name="bills"
             placeholder="$ `Bills`"
             onChange={(e) => onChange(e)}
           />
-          <Buttons isTypeSubmit text="Submit" handleClick={handleClick} />
+          <Buttons isTypeSubmit text="Submit" />
         </div>
       </form>
     </div>
   );
 };
-export default CreateTarget;
+
+const mapStateToProps = (state: any) => {
+  return {
+    state,
+  };
+};
+export default connect(mapStateToProps, { CreateAction })(CreateTarget);

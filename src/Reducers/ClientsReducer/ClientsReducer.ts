@@ -1,8 +1,6 @@
-import {
-  ClientsActionDispatchTypes,
-  FETCH_CLIENTS,
-  Client,
-} from '../../Actions/clients.action';
+import { ClientsActionDispatchTypes } from '../../Actions/action.types';
+import { FETCH_CLIENTS, Client } from '../../Actions/clients.action';
+import { CREATE_CLIENT } from '../../Actions/create.action';
 
 // all our listings state lives
 export const initialState: InitialStateProp = {};
@@ -32,6 +30,13 @@ export const ClientsReducer = (
         persons: clients.length,
         completed: clients.filter((item) => item.paid === true).length, // filter the item that has an array then calculate the length
         billings: clients.map((item) => item.bills).reduce((a, b) => a + b), // get all the bills and put it in to an array, then reduce it into 1 value
+      };
+    }
+    case CREATE_CLIENT: {
+      const client: Client = action.payload;
+      return {
+        ...state,
+        clients: [...state.clients, client],
       };
     }
     default:

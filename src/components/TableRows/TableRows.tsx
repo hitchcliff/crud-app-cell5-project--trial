@@ -1,20 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { EditableTable } from '.';
 import { Client } from '../../Actions/clients.action';
 import styles from './TableRows.module.scss';
 
 interface ITableRows {
   clients: Client[];
-}
-
-interface EditableTable {
-  id?: string;
-  gender?: string;
-  first_name?: string;
-  last_name?: string;
-  mobile_number?: string;
-  bills?: number;
-  paid?: boolean;
-  isPaid?: number;
 }
 
 /**
@@ -39,11 +29,11 @@ const TableRows = ({ clients }: ITableRows): JSX.Element => {
   const onSave = (id: string) => {
     setCurrentIndex(null); // reset
     const findItem = data?.find((item) => {
-      return item.id === id;
+      return item._id === id;
     });
 
     const found = { ...findItem, ...state }; // once it is found
-    const filter = data?.filter((item) => item.id !== found.id); // start filtering the data
+    const filter = data?.filter((item) => item._id !== found.id); // start filtering the data
     const newData: any = [found, ...filter]; // spread the data
     setData(newData);
   };
@@ -64,14 +54,14 @@ const TableRows = ({ clients }: ITableRows): JSX.Element => {
         onSave(id);
       }
     } else if (type === 'delete') {
-      const deleteValue = data?.filter((item) => item.id !== id);
+      const deleteValue = data?.filter((item) => item._id !== id);
       setData(deleteValue);
     }
   };
 
   // Simply map the clients array from the server
   const mappingClients = data?.map((client: Client, index: number) => {
-    const { id, gender, paid } = client;
+    const { _id, gender, paid } = client;
     return (
       <tr
         key={index}
@@ -83,7 +73,7 @@ const TableRows = ({ clients }: ITableRows): JSX.Element => {
         {/* If any Edit button is clicked, we then compare the `id` and `currentIndex` which was
                 set in `onEdit()` FE. Show `input` if true */}
         <td>
-          {id === currentIndex ? (
+          {_id === currentIndex ? (
             <input
               type="text"
               name="gender"
@@ -104,20 +94,20 @@ const TableRows = ({ clients }: ITableRows): JSX.Element => {
         {/* delete, update, and toggle complete */}
         <td className={styles.body__actions}>
           <button
-            className={currentIndex === id ? styles.save : styles.edit}
-            onClick={() => onEdit(id, 'edit')}
+            className={currentIndex === _id ? styles.save : styles.edit}
+            onClick={() => onEdit(_id, 'edit')}
           >
             E
           </button>
           <button
             className={styles.delete}
-            onClick={() => onEdit(id, 'delete')}
+            onClick={() => onEdit(_id, 'delete')}
           >
             D
           </button>
           <button
             className={paid ? styles.paid : styles.unPaid}
-            onClick={() => onEdit(id, 'complete')}
+            onClick={() => onEdit(_id, 'complete')}
           >
             C
           </button>

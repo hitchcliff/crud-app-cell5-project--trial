@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import { Dispatch } from 'react';
+import { ClientsActionDispatchTypes } from './action.types';
 
 /**
  * This is a `ClientsAction`, the one who will req. HTTP in the Server
@@ -27,7 +28,7 @@ export interface FetchClients {
 }
 
 export interface Client {
-  id: string;
+  _id: string;
   first_name: string;
   last_name: string;
   gender: string;
@@ -35,5 +36,3 @@ export interface Client {
   bills: number;
   paid: boolean;
 }
-
-export type ClientsActionDispatchTypes = FetchClients;
