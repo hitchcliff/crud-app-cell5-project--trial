@@ -7,7 +7,7 @@ import styles from './SortingOptions.module.scss';
  * @function
  * @returns {JSX.Element} - Rendered component (or null if `success` prop is missing)
  */
-const Sorting = () => {
+const SortingOptions = () => {
   const mapBoxesSwitches = BoxSwitches.map((item) => {
     return (
       <div key={item.id} className={styles.box}>
@@ -27,4 +27,4 @@ const Sorting = () => {
     </div>
   );
 };
-export default Sorting;
+export default SortingOptions;

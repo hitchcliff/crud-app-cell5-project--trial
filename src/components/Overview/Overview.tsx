@@ -1,13 +1,27 @@
 import React from 'react';
+import styles from './Overview.module.scss';
+import PropTypes from 'prop-types';
+
+// redux
+import { connect } from 'react-redux';
+import { RootStore } from '../../Store';
+
+// componentts
 import AccountSettings from '../AccountSettings/AccountSettings';
 import Card from '../Card/Card';
-import styles from './Overview.module.scss';
+
+export interface IOverviewProp {
+  persons: number;
+  billings: number;
+  completed: number;
+}
 /**
  * Functional react component for congratulatory message.
  * @function
  * @returns {JSX.Element} - Rendered component (or null if `success` prop is missing)
  */
-const Overview = () => {
+const Overview = (props: any) => {
+  const { persons, billings, completed }: IOverviewProp = props;
   return (
     <div className={styles.overview}>
       {/* short intro about the app */}
@@ -34,12 +48,29 @@ const Overview = () => {
       <div className={styles.cards}>
         <h2 className={styles.cards__title}>Overview</h2>
         <div className={styles.cards__container}>
-          <Card title="Persons" value={50} />
-          <Card title="Billings" value={500} />
-          <Card title="Completed" value={25} />
+          <Card title="Persons" value={persons} />
+          <Card title="Billings" value={billings} />
+          <Card title="Completed" value={completed} />
         </div>
       </div>
     </div>
   );
 };
-export default Overview;
+
+Overview.propTypes = {
+  props: PropTypes.shape({
+    persons: PropTypes.number.isRequired,
+    billings: PropTypes.number.isRequired,
+    completed: PropTypes.number.isRequired,
+  }),
+};
+
+const mapStateToProps = (state: RootStore) => {
+  return {
+    persons: state.listings.persons,
+    billings: state.listings.billings,
+    completed: state.listings.completed,
+  };
+};
+
+export default connect(mapStateToProps)(Overview);
