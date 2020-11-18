@@ -6,9 +6,4 @@
 }
 
 // ************* Media Query
-@media screen and (max-width: 980px) {
-  .card {
-    padding: 10px;
-    width: 100%;
-  }
-}
+@import './Card.media.scss';

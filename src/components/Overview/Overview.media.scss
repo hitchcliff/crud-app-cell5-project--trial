@@ -1,0 +1,19 @@
+@media screen and (max-width: 980px) {
+  .overview {
+    .heading {
+      flex-wrap: wrap-reverse;
+      grid-gap: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .overview {
+    .cards {
+      &__container {
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 10px;
+      }
+    }
+  }
+}

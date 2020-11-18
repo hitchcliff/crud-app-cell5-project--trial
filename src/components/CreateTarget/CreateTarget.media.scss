@@ -1,0 +1,49 @@
+@media screen and (max-width: 1200px) {
+  .target {
+    form {
+      .group {
+        &__input {
+          padding: 8px;
+        }
+        button {
+          padding: 5px;
+          font-size: $xsmall;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .target {
+    form {
+      .group {
+        grid-template-columns: 1fr;
+        grid-gap: 0;
+        &__input {
+          padding: 8px;
+          margin: 5px 0;
+        }
+        button {
+          padding: 5px;
+          margin: 5px 0;
+          font-size: $xsmall;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .target {
+    form {
+      .group {
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 10px;
+        &__input {
+          padding: 10px;
+        }
+      }
+    }
+  }
+}

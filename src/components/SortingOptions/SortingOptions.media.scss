@@ -1,0 +1,25 @@
+@media screen and (max-width: 1200px) {
+  .sorting {
+    .boxes {
+      .box {
+        padding: 10px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .sorting {
+    .boxes {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .sorting {
+    .boxes {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+}

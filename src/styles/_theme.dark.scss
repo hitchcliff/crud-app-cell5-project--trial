@@ -31,7 +31,7 @@
 @media screen and (max-width: 768px) {
   .App[data-theme='dark'] {
     .container {
-      flex-wrap: wrap-reverse;
+      flex-wrap: wrap;
 
       &__sidebar {
         height: auto;
