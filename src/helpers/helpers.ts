@@ -2,7 +2,7 @@
  * A Helper function that sits in Root to Format number
  * @function
  * @param num - Takes a number `args`
- * @returns - $2,500.00
+ * @returns - Returns `$2,500`
  */
 export const FormatNumber = (num: number) => {
   const formatter = new Intl.NumberFormat('en-us', {
