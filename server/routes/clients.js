@@ -64,12 +64,14 @@ router.get('/', async (req, res) => {
                const order = checkOrder(search);
                const data = await sorting(Client, {paid: order});
                res.json(data)
-            } else {
+            } 
+            else {
                 const regex = new RegExp(escapeRegex(search), 'gi')
                 const clients = await Client.find({
                     first_name: regex,
                 });
                 res.json(clients)
+
             }
         } 
         
