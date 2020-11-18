@@ -31,7 +31,6 @@ const checkOrder = (str) => {
     return getLastStr === "_dsc" ? -1 : 0
 }
 
-
 // get all the clients
 router.get('/', async (req, res) => {
     try {
