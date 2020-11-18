@@ -31,19 +31,26 @@
       border-radius: 2px;
     }
     .edit {
-      background: lightgreen;
+      background: none;
+      color: white;
     }
     .save {
-      background: lightyellow;
+      background: $color3;
+      color: $color1;
+      font-weight: bold;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
     }
     .delete {
-      background: orangered;
+      background: $color5;
+      color: white;
+      font-weight: bold;
     }
     .paid {
-      background: lightsalmon;
+      background: $color3;
+      color: white;
     }
     .unpaid {
-      background: lightcoral;
+      background: none;
     }
   }
 }
