@@ -1,6 +1,11 @@
 import { ClientsActionDispatchTypes } from '../../Actions/action.types';
 import { FETCH_CLIENTS, Client } from '../../Actions/clients.action';
 import { CREATE_CLIENT } from '../../Actions/create.action';
+import { DELETE_CLIENT } from '../../Actions/delete.action';
+import { UPDATE_CLIENT } from '../../Actions/update.action';
+
+// helpers
+import { updateClientState } from './helpers';
 
 // all our listings state lives
 export const initialState: InitialStateProp = {};
@@ -26,19 +31,31 @@ export const ClientsReducer = (
       const clients: Client[] = action.payload;
       return {
         ...state,
-        clients,
-        persons: clients.length,
-        completed: clients.filter((item) => item.paid === true).length, // filter the item that has an array then calculate the length
-        billings: clients.map((item) => item.bills).reduce((a, b) => a + b), // get all the bills and put it in to an array, then reduce it into 1 value
+        ...updateClientState(clients),
       };
     }
     case CREATE_CLIENT: {
-      const client: Client = action.payload;
+      const client = action.payload;
+      const clients: Client[] = [...state.clients, client];
       return {
         ...state,
-        clients: [...state.clients, client], // adding a new item to the state
+        ...updateClientState(clients),
       };
     }
+    case DELETE_CLIENT: {
+      const _id = action.payload;
+      return {
+        ...state,
+        clients: state.clients?.filter((item) => item._id !== _id),
+      };
+    }
+    // case UPDATE_CLIENT: {
+    //   const client = action.payload;
+    //   return {
+    //     ...state,
+    //     ...updateClientState()
+    //   }
+    // }
     default:
       return state;
   }

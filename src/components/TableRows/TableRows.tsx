@@ -1,22 +1,39 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { EditableTable } from '.';
-import { Client } from '../../Actions/clients.action';
 import styles from './TableRows.module.scss';
 
-interface ITableRows {
-  clients: Client[];
-}
+// types
+import { EditableTable } from '.';
+import { Client } from '../../Actions/clients.action';
+
+// redux
+import { connect } from 'react-redux';
+import { RootStore } from '../../Store';
+
+// actions
+import { DeleteClientAction } from '../../Actions/delete.action';
+import { UpdateClientAction } from '../../Actions/update.action';
 
 /**
  * Functional react component for congratulatory message.
  * @function
  * @returns {JSX.Element} - Rendered component (or null if `success` prop is missing)
  */
-const TableRows = ({ clients }: ITableRows): JSX.Element => {
+const TableRows = (props: any): JSX.Element => {
   const [currentIndex, setCurrentIndex] = useState<string | null>();
   const [data, setData] = useState<Client[]>();
-  const [state, set] = useState<EditableTable>({}); // new values temporarily stored
+  const [state, set] = useState<EditableTable>({
+    first_name: '',
+    last_name: '',
+    mobile_number: '',
+    bills: '',
+    gender: '',
+  }); // new values temporarily stored
 
+  const {
+    state: { clients },
+  } = props;
+
+  // set the data
   useEffect(() => {
     const req = setTimeout(() => {
       setData(clients);
@@ -26,16 +43,13 @@ const TableRows = ({ clients }: ITableRows): JSX.Element => {
     };
   }, [clients]);
 
-  const onSave = (id: string) => {
+  const onSave = (_id: string) => {
     setCurrentIndex(null); // reset
     const findItem = data?.find((item) => {
-      return item._id === id;
+      return item._id === _id;
     });
 
-    const found = { ...findItem, ...state }; // once it is found
-    const filter = data?.filter((item) => item._id !== found.id); // start filtering the data
-    const newData: any = [found, ...filter]; // spread the data
-    setData(newData);
+    props.UpdateClientAction({ ...findItem, ...state }); // patch
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +60,7 @@ const TableRows = ({ clients }: ITableRows): JSX.Element => {
     set({ [name]: value });
   };
 
-  const onEdit = (id: string, type: string) => {
+  const handleClick = (id: string, type: string) => {
     if (type === 'edit') {
       setCurrentIndex(id);
       // if currentIndex === id, that means user is saving
@@ -54,8 +68,7 @@ const TableRows = ({ clients }: ITableRows): JSX.Element => {
         onSave(id);
       }
     } else if (type === 'delete') {
-      const deleteValue = data?.filter((item) => item._id !== id);
-      setData(deleteValue);
+      props.DeleteClientAction(id); // delete
     }
   };
 
@@ -78,7 +91,8 @@ const TableRows = ({ clients }: ITableRows): JSX.Element => {
               type="text"
               name="gender"
               className={styles.body__input}
-              placeholder={gender} // telling typescript to accept undefined values
+              placeholder={gender}
+              value={state.gender}
               onChange={(e) => onChange(e)} // this is where the logic of adding new values in state
             />
           ) : (
@@ -95,19 +109,19 @@ const TableRows = ({ clients }: ITableRows): JSX.Element => {
         <td className={styles.body__actions}>
           <button
             className={currentIndex === _id ? styles.save : styles.edit}
-            onClick={() => onEdit(_id, 'edit')}
+            onClick={() => handleClick(_id, 'edit')}
           >
             E
           </button>
           <button
             className={styles.delete}
-            onClick={() => onEdit(_id, 'delete')}
+            onClick={() => handleClick(_id, 'delete')}
           >
             D
           </button>
           <button
             className={paid ? styles.paid : styles.unPaid}
-            onClick={() => onEdit(_id, 'complete')}
+            onClick={() => handleClick(_id, 'complete')}
           >
             C
           </button>
@@ -118,4 +132,13 @@ const TableRows = ({ clients }: ITableRows): JSX.Element => {
 
   return <>{mappingClients}</>;
 };
-export default TableRows;
+
+const mapStateToProps = (state: RootStore) => {
+  return {
+    state: state.listings,
+  };
+};
+export default connect(mapStateToProps, {
+  DeleteClientAction,
+  UpdateClientAction,
+})(TableRows);

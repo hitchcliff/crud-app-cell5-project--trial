@@ -126,7 +126,7 @@ router.patch('/:id', async (req, res) => {
            {_id: req.params.id},
            { $set: clientObject(req)}
        )
-       res.status(200).json(updateClient)
+       res.status(200).json(req.params.id)
     } catch (error) {
        res.status(500).json({
            message: "cannot update this client" 

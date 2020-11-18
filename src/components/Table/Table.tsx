@@ -15,12 +15,7 @@ import TableRows from '../TableRows/TableRows';
  * @returns {JSX.Element} - Rendered component (o null if `success` prop is missing)
  */
 const Table = (props: any) => {
-  // ClientsAction creators `must not` be used here
-  // Shadow variable gives out error
-  // const { listings } = props;
-  const { clients } = props.listings;
-
-  // temporarily run the action
+  // fetch the the `clients` here to avoid confusion in `TableRows` component
   useEffect(() => {
     const req = setTimeout(() => {
       props.ClientsAction();
@@ -29,8 +24,6 @@ const Table = (props: any) => {
       clearTimeout(req);
     };
   }, []);
-
-  console.log(clients);
 
   return (
     <div className={styles.table}>
@@ -51,7 +44,7 @@ const Table = (props: any) => {
           {/* each and every rows have 3 buttons */}
           {/* delete, update, and toggle complete */}
           {/* a good reason to detach this into small component */}
-          <TableRows clients={clients} />
+          <TableRows />
         </tbody>
       </table>
     </div>
