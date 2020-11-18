@@ -13,7 +13,7 @@ import styles from './SortingOptions.module.scss';
  */
 const SortingOptions = () => {
   const [state, set] = useState<string>('');
-  const [active, setActive] = useState<number>();
+  const [active, setActive] = useState<number>(0); // current index
 
   const dispatch = useDispatch();
 
@@ -24,18 +24,17 @@ const SortingOptions = () => {
     return () => {
       clearTimeout(res);
     };
-  }, []);
+  }, [state]);
 
   const handleClick = (id: number, item: IBoxSwitchesType) => {
-    setActive(id);
+    setActive(id); // id = `0`, set active to `1`
     set(item.dsc);
+
     if (active === id) {
-      setActive(id);
+      setActive(0); // id = `1`, set active to `0`
       set(item.asc);
     }
   };
-
-  console.log(active, state);
 
   const mapBoxesSwitches = BoxSwitches.map((item) => {
     return (
