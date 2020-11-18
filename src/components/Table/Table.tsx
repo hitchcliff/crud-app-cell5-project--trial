@@ -17,9 +17,8 @@ import TableRows from '../TableRows/TableRows';
 const Table = (props: any) => {
   // ClientsAction creators `must not` be used here
   // Shadow variable gives out error
-  const {
-    listings: { clients },
-  } = props;
+  // const { listings } = props;
+  const { clients } = props.listings;
 
   // temporarily run the action
   useEffect(() => {
@@ -30,6 +29,8 @@ const Table = (props: any) => {
       clearTimeout(req);
     };
   }, []);
+
+  console.log(clients);
 
   return (
     <div className={styles.table}>

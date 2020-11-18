@@ -8,10 +8,7 @@ export const ClientsAction = () => async (
   dispatch: Dispatch<ClientsActionDispatchTypes>
 ) => {
   try {
-    const { data }: any = await Axios.get(
-      'https://raw.githubusercontent.com/hitchcliff/fake-apis/main/cell5-crud-app.json'
-    );
-
+    const { data } = await Axios.get('http://localhost:5000/clients');
     //   if success
     dispatch({
       type: FETCH_CLIENTS,
@@ -26,7 +23,7 @@ export const ClientsAction = () => async (
 export const FETCH_CLIENTS = 'FETCH_CLIENTS';
 export interface FetchClients {
   type: typeof FETCH_CLIENTS;
-  payload: ListingProperty;
+  payload: Client[];
 }
 
 export interface ListingProperty {
@@ -36,7 +33,7 @@ export interface ListingProperty {
 }
 
 export interface Client {
-  id: number;
+  id: string;
   first_name: string;
   last_name: string;
   gender: string;

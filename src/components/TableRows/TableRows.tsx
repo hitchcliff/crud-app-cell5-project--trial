@@ -7,7 +7,7 @@ interface ITableRows {
 }
 
 interface EditableTable {
-  id?: number;
+  id?: string;
   gender?: string;
   first_name?: string;
   last_name?: string;
@@ -23,7 +23,7 @@ interface EditableTable {
  * @returns {JSX.Element} - Rendered component (or null if `success` prop is missing)
  */
 const TableRows = ({ clients }: ITableRows): JSX.Element => {
-  const [currentIndex, setCurrentIndex] = useState<number | null>();
+  const [currentIndex, setCurrentIndex] = useState<string | null>();
   const [data, setData] = useState<Client[]>();
   const [state, set] = useState<EditableTable>({}); // new values temporarily stored
 
@@ -36,7 +36,7 @@ const TableRows = ({ clients }: ITableRows): JSX.Element => {
     };
   }, [clients]);
 
-  const onSave = (id: number) => {
+  const onSave = (id: string) => {
     setCurrentIndex(null); // reset
     const findItem = data?.find((item) => {
       return item.id === id;
@@ -56,7 +56,7 @@ const TableRows = ({ clients }: ITableRows): JSX.Element => {
     set({ [name]: value });
   };
 
-  const onEdit = (id: number, type: string) => {
+  const onEdit = (id: string, type: string) => {
     if (type === 'edit') {
       setCurrentIndex(id);
       // if currentIndex === id, that means user is saving
