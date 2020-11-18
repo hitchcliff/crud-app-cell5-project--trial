@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { DeleteClientAction } from '../../Actions/delete.action';
 import { UpdateClientAction } from '../../Actions/update.action';
 import { FormatNumber } from '../../helpers/helpers';
+import { PaidClientAction } from '../../Actions/paid.action';
 
 interface ITableRowsProp {
   clients?: Client[];
@@ -47,6 +48,18 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
     set({ [name]: value });
   };
 
+  /**
+   * Runs once user clicked `C`
+   * @param {string} id - Accepts `ID` as an argument
+   */
+  const onPaid = (id: string) => {
+    dispatch(PaidClientAction(id, 'paid'));
+  };
+
+  /**
+   * Runs once user clicked `S`
+   * @param {string} _id - Accepts `ID` as an argument
+   */
   const onSave = (_id: string) => {
     setCurrentIndex(null); // reset
 
@@ -57,10 +70,18 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
     dispatch(UpdateClientAction(newBody)); // [DISPATCH]
   };
 
+  /**
+   * Runs once user clicked `D`
+   * @param {string} id - Accepts `ID` as an argument
+   */
   const onDelete = async (id: string) => {
     dispatch(DeleteClientAction(id)); // [DISPATCH]
   };
 
+  /**
+   * Runs once user clicked `E`
+   * @param id - Accepts an `ID` as an argument
+   */
   const onEdit = (id: string) => {
     setCurrentIndex(id);
     // if currentIndex === id, that means user is saving
@@ -179,7 +200,7 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
           then updates the Redux State. Dispatch actions then sent to Reducers*/}
           <button
             className={client.paid ? styles.paid : styles.unPaid}
-            // onClick={() => handleClick(_id, 'complete')}
+            onClick={() => onPaid(client._id)}
           >
             C
           </button>

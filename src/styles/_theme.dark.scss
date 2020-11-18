@@ -14,7 +14,6 @@
       background: $color2;
       padding: 50px;
       height: 100vh;
-      overflow-y: scroll;
 
       @import url('./_scroll.scss');
     }
@@ -30,6 +29,16 @@
 }
 
 // ************* Media Query
+@media screen and (max-width: 980px) {
+  .App[data-theme='dark'] {
+    .container {
+      &__sidebar {
+        overflow-y: scroll;
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 768px) {
   .App[data-theme='dark'] {
     .container {

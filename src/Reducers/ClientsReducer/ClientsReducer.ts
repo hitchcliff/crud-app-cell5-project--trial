@@ -2,6 +2,7 @@ import { ClientsActionDispatchTypes } from '../../Actions/action.types';
 import { FETCH_CLIENTS, Client } from '../../Actions/clients.action';
 import { CREATE_CLIENT } from '../../Actions/create.action';
 import { DELETE_CLIENT } from '../../Actions/delete.action';
+import { PAID_CLIENT } from '../../Actions/paid.action';
 import { SEARCH_CLIENT } from '../../Actions/search.action';
 import { SORT_CLIENT } from '../../Actions/sort.action';
 import { UPDATE_CLIENT } from '../../Actions/update.action';
@@ -85,6 +86,22 @@ export const ClientsReducer = (
       return {
         ...state,
         ...updateClientState(action.payload),
+      };
+    }
+
+    case PAID_CLIENT: {
+      const _id = action.payload;
+      const client = [...state.clients].filter((item) => item._id === _id)[0];
+      const modifiedClients = [...state.clients].filter(
+        (item) => item._id !== client._id
+      );
+
+      const newBody = { ...client, ...{ paid: true } };
+
+      const clients = [...modifiedClients, newBody];
+      return {
+        ...state,
+        ...updateClientState(clients),
       };
     }
     default:
