@@ -36,7 +36,7 @@ export const ClientsReducer = (
       const client: Client = action.payload;
       return {
         ...state,
-        clients: [...state.clients, client],
+        clients: [...state.clients, client], // adding a new item to the state
       };
     }
     default:

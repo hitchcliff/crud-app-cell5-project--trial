@@ -4,7 +4,7 @@ import styles from './CreateTarget.module.scss';
 import Buttons from '../Buttons/Buttons';
 
 import { connect } from 'react-redux';
-import { CreateAction } from '../../Actions/create.action';
+import { CreateClientAction } from '../../Actions/create.action';
 import { EditableTable } from '../TableRows';
 /**
  * Functional react component for congratulatory message.
@@ -12,13 +12,26 @@ import { EditableTable } from '../TableRows';
  * @returns {JSX.Element} - Rendered component (or null if `success` prop is missing)
  */
 const CreateTarget = (props: any) => {
-  const [state, set] = useState<EditableTable>({
+  const [state, set] = useState<EditableTable | null>({
+    first_name: '',
+    last_name: '',
+    mobile_number: '',
+    bills: '',
+    gender: '',
     paid: false, // by default, newly added clients are `not` paid
   });
 
-  const onSubmit = (e: any) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    props.CreateAction(state);
+    props.CreateClientAction(state);
+    set({
+      first_name: '',
+      last_name: '',
+      mobile_number: '',
+      bills: '',
+      gender: '',
+      paid: false,
+    });
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,6 +45,7 @@ const CreateTarget = (props: any) => {
       value = target.value;
     }
 
+    // add a default paid to `false` that's why we are spreading here
     set({
       ...state,
       [name]: value,
@@ -52,6 +66,7 @@ const CreateTarget = (props: any) => {
             type="text"
             name="first_name"
             placeholder="First name"
+            value={state?.first_name}
             onChange={(e) => onChange(e)}
           />
           <input
@@ -59,6 +74,7 @@ const CreateTarget = (props: any) => {
             type="text"
             name="last_name"
             placeholder="Last name"
+            value={state?.last_name}
             onChange={(e) => onChange(e)}
           />
         </div>
@@ -68,6 +84,7 @@ const CreateTarget = (props: any) => {
             type="text"
             name="gender"
             placeholder="Gender"
+            value={state?.gender}
             onChange={(e) => onChange(e)}
           />
           <input
@@ -75,6 +92,7 @@ const CreateTarget = (props: any) => {
             type="text"
             name="mobile_number"
             placeholder="Contact number"
+            value={state?.mobile_number}
             onChange={(e) => onChange(e)}
           />
         </div>
@@ -83,7 +101,8 @@ const CreateTarget = (props: any) => {
             className={styles.group__input}
             type="number"
             name="bills"
-            placeholder="$ `Bills`"
+            placeholder="Bills"
+            value={state?.bills}
             onChange={(e) => onChange(e)}
           />
           <Buttons isTypeSubmit text="Submit" />
@@ -98,4 +117,4 @@ const mapStateToProps = (state: any) => {
     state,
   };
 };
-export default connect(mapStateToProps, { CreateAction })(CreateTarget);
+export default connect(mapStateToProps, { CreateClientAction })(CreateTarget);

@@ -4,6 +4,6 @@ export interface EditableTable {
   first_name?: string;
   last_name?: string;
   mobile_number?: string;
-  bills?: number;
+  bills?: number | string;
   paid?: boolean;
 }
