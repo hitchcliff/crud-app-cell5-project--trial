@@ -1,17 +1,18 @@
 import { Dispatch } from 'react';
 import axios from 'axios';
 import { ClientsActionDispatchTypes } from './action.types';
+import { Client } from './clients.action';
 
-export const DeleteClientAction = (_id: string) => async (
+export const DeleteClientAction = (id: string) => async (
   dispatch: Dispatch<ClientsActionDispatchTypes>
 ) => {
   try {
-    await axios.delete(`http://localhost:5000/clients/${_id}`);
+    await axios.delete(`http://localhost:5000/clients/${id}`);
 
-    dispatch({
-      type: DELETE_CLIENT,
-      payload: _id,
-    });
+    // dispatch({
+    //   type: DELETE_CLIENT,
+    //   payload: data,
+    // });
   } catch (error) {
     console.log(error);
   }
@@ -21,5 +22,5 @@ export const DeleteClientAction = (_id: string) => async (
 export const DELETE_CLIENT = 'CREATE_CLIENT';
 export interface DeleteClient {
   type: typeof DELETE_CLIENT;
-  payload: string;
+  payload: any;
 }

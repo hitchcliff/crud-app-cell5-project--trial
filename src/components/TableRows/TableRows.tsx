@@ -6,21 +6,30 @@ import { EditableTable } from '.';
 import { Client } from '../../Actions/clients.action';
 
 // redux
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { RootStore } from '../../Store';
 
 // actions
+import { ClientsAction } from '../../Actions/clients.action';
 import { DeleteClientAction } from '../../Actions/delete.action';
 import { UpdateClientAction } from '../../Actions/update.action';
+import Axios from 'axios';
+
+interface ITableRowsProp {
+  clients: Client[];
+}
 
 /**
  * Functional react component for congratulatory message.
  * @function
  * @returns {JSX.Element} - Rendered component (or null if `success` prop is missing)
  */
-const TableRows = (props: any): JSX.Element => {
+const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
   const [currentIndex, setCurrentIndex] = useState<string | null>();
   const [data, setData] = useState<Client[]>();
+  const dispatch = useDispatch();
+
+  const [test, setTest] = useState<Client[]>();
   const [state, set] = useState<EditableTable>({
     first_name: '',
     last_name: '',
@@ -29,28 +38,10 @@ const TableRows = (props: any): JSX.Element => {
     gender: '',
   }); // new values temporarily stored
 
-  const {
-    state: { clients },
-  } = props;
-
-  // set the data
+  // testing
   useEffect(() => {
-    const req = setTimeout(() => {
-      setData(clients);
-    });
-    return () => {
-      clearTimeout(req);
-    };
+    setData(clients);
   }, [clients]);
-
-  const onSave = (_id: string) => {
-    setCurrentIndex(null); // reset
-    const findItem = data?.find((item) => {
-      return item._id === _id;
-    });
-
-    props.UpdateClientAction({ ...findItem, ...state }); // patch
-  };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.currentTarget;
@@ -60,38 +51,65 @@ const TableRows = (props: any): JSX.Element => {
     set({ [name]: value });
   };
 
-  const handleClick = (id: string, type: string) => {
-    if (type === 'edit') {
-      setCurrentIndex(id);
-      // if currentIndex === id, that means user is saving
-      if (id === currentIndex) {
-        onSave(id);
-      }
-    } else if (type === 'delete') {
-      props.DeleteClientAction(id); // delete
+  const onSave = (_id: string) => {
+    setCurrentIndex(null); // reset
+
+    /**
+     * There is a bug when updating the `state` in `redux`.
+     * It is adding another input below the table once its Edited
+     * TEMPORARY SOLUTION
+     */
+    const found = data?.find((item: Client) => {
+      return item._id === _id;
+    });
+
+    const newBody = { ...found, ...state };
+    const filteredData: any = data?.filter((item) => item._id !== _id);
+    const finalData = [...filteredData, newBody];
+    setData(finalData);
+    dispatch(UpdateClientAction(finalData)); // patch
+  };
+
+  const onDelete = async (id: string) => {
+    /**
+     * There is a bug when deleting the `state` in `redux`.
+     * We have to loop through our data to delete the state
+     * TEMPORARY SOLUTION
+     */
+    const newData = [...data].filter((item: Client) => item._id !== id);
+    setData(newData);
+    dispatch(DeleteClientAction(id)); // [DISPATCH]
+  };
+
+  const onEdit = (id: string) => {
+    setCurrentIndex(id);
+    // if currentIndex === id, that means user is saving
+    if (id === currentIndex) {
+      onSave(id);
     }
   };
 
   // Simply map the clients array from the server
-  const mappingClients = data?.map((client: Client, index: number) => {
-    const { _id, gender, paid } = client;
+  if (!data) return <></>;
+  const mappingClients = [...data].map((client: Client, index: number) => {
+    if (client === null) return;
     return (
       <tr
         key={index}
         className={styles.body}
-        data-color={`${paid ? 'completed' : 'not-completed'}`}
+        data-color={`${client.paid ? 'completed' : 'not-completed'}`}
       >
         <td>{index + 1}</td>
 
         {/* If any Edit button is clicked, we then compare the `id` and `currentIndex` which was
                 set in `onEdit()` FE. Show `input` if true */}
         <td>
-          {_id === currentIndex ? (
+          {client._id === currentIndex ? (
             <input
               type="text"
               name="gender"
               className={styles.body__input}
-              placeholder={gender}
+              placeholder={client.gender}
               value={state.gender}
               onChange={(e) => onChange(e)} // this is where the logic of adding new values in state
             />
@@ -108,20 +126,20 @@ const TableRows = (props: any): JSX.Element => {
         {/* delete, update, and toggle complete */}
         <td className={styles.body__actions}>
           <button
-            className={currentIndex === _id ? styles.save : styles.edit}
-            onClick={() => handleClick(_id, 'edit')}
+            className={currentIndex === client._id ? styles.save : styles.edit}
+            onClick={() => onEdit(client._id)}
           >
             E
           </button>
           <button
             className={styles.delete}
-            onClick={() => handleClick(_id, 'delete')}
+            onClick={() => onDelete(client._id)}
           >
             D
           </button>
           <button
-            className={paid ? styles.paid : styles.unPaid}
-            onClick={() => handleClick(_id, 'complete')}
+            className={client.paid ? styles.paid : styles.unPaid}
+            // onClick={() => handleClick(_id, 'complete')}
           >
             C
           </button>
@@ -133,12 +151,4 @@ const TableRows = (props: any): JSX.Element => {
   return <>{mappingClients}</>;
 };
 
-const mapStateToProps = (state: RootStore) => {
-  return {
-    state: state.listings,
-  };
-};
-export default connect(mapStateToProps, {
-  DeleteClientAction,
-  UpdateClientAction,
-})(TableRows);
+export default TableRows;

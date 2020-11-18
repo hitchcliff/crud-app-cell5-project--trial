@@ -4,8 +4,10 @@ import styles from './CreateTarget.module.scss';
 import Buttons from '../Buttons/Buttons';
 
 import { connect } from 'react-redux';
-import { CreateClientAction } from '../../Actions/create.action';
 import { EditableTable } from '../TableRows';
+
+import { ClientsAction } from '../../Actions/clients.action';
+import { CreateClientAction } from '../../Actions/create.action';
 /**
  * Functional react component for congratulatory message.
  * @function
@@ -32,6 +34,8 @@ const CreateTarget = (props: any) => {
       gender: '',
       paid: false,
     });
+
+    props.ClientsAction();
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -117,4 +121,6 @@ const mapStateToProps = (state: any) => {
     state,
   };
 };
-export default connect(mapStateToProps, { CreateClientAction })(CreateTarget);
+export default connect(mapStateToProps, { CreateClientAction, ClientsAction })(
+  CreateTarget
+);

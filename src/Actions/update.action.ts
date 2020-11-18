@@ -7,17 +7,9 @@ import { Client } from './clients.action';
 // types
 import { EditableTable } from '../components/TableRows';
 
-export const UpdateClientAction = (body: EditableTable) => async (
-  dispatch: Dispatch<ClientsActionDispatchTypes>
-) => {
+export const UpdateClientAction = (body: any) => async () => {
   try {
-    console.log(body);
-    await axios.patch(`http://localhost:5000/clients/${body.id}`, body);
-
-    dispatch({
-      type: UPDATE_CLIENT,
-      payload: body,
-    });
+    await axios.patch(`http://localhost:5000/clients/${body._id}`, body);
   } catch (error) {
     console.log(error);
   }

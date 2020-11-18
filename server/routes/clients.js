@@ -110,7 +110,7 @@ router.get('/:id', async (req, res) => {
 // delete a client through id
 router.delete('/:id', async (req, res) => {
     try {
-        const removedClient = await Client.remove({ _id: req.params.id });
+        const removedClient = await Client.deleteOne({ _id: req.params.id });
         res.json(removedClient); 
     } catch (error) {
         res.status(501).json({

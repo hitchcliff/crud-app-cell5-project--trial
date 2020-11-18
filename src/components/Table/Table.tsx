@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Table.module.scss';
 
-// redux
-import { connect } from 'react-redux';
-import { RootStore } from '../../Store';
-
 // action creators
-import { ClientsAction } from '../../Actions/clients.action';
 import TableRows from '../TableRows/TableRows';
+import { useDispatch, useSelector } from 'react-redux';
+import { ClientsAction } from '../../Actions/clients.action';
+import { RootStore } from '../../Store';
 
 /**
  * Functional react component for congratulatory message.
  * @function
  * @returns {JSX.Element} - Rendered component (o null if `success` prop is missing)
  */
-const Table = (props: any) => {
+const Table = () => {
+  const { clients } = useSelector((item: RootStore) => item.listings);
+  const dispatch = useDispatch();
+
   // fetch the the `clients` here to avoid confusion in `TableRows` component
   useEffect(() => {
     const req = setTimeout(() => {
-      props.ClientsAction();
+      dispatch(ClientsAction());
     });
     return () => {
       clearTimeout(req);
@@ -44,17 +45,11 @@ const Table = (props: any) => {
           {/* each and every rows have 3 buttons */}
           {/* delete, update, and toggle complete */}
           {/* a good reason to detach this into small component */}
-          <TableRows />
+          <TableRows clients={clients} />
         </tbody>
       </table>
     </div>
   );
 };
 
-const mapStateToProps = (state: RootStore) => {
-  return {
-    listings: state.listings,
-  };
-};
-
-export default connect(mapStateToProps, { ClientsAction })(Table);
+export default Table;

@@ -8,13 +8,12 @@ import { UPDATE_CLIENT } from '../../Actions/update.action';
 import { updateClientState } from './helpers';
 
 // all our listings state lives
-export const initialState: InitialStateProp = {};
+export const initialState: InitialStateProp = {
+  clients: [],
+};
 
 export interface InitialStateProp {
   clients?: Client[];
-  completed?: number;
-  persons?: number;
-  billings?: number;
 }
 
 /**
@@ -22,40 +21,46 @@ export interface InitialStateProp {
  * @param state - Initial state
  * @param action - Dispatch types actions
  */
-export const ClientsReducer = (
-  state = initialState,
-  action: ClientsActionDispatchTypes
-) => {
+export const ClientsReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case FETCH_CLIENTS: {
-      const clients: Client[] = action.payload;
       return {
         ...state,
-        ...updateClientState(clients),
+        clients: action.payload,
       };
     }
+
     case CREATE_CLIENT: {
-      const client = action.payload;
-      const clients: Client[] = [...state.clients, client];
       return {
         ...state,
-        ...updateClientState(clients),
+        clients: !state ? action.payload : [...state.clients, action.payload],
       };
     }
-    case DELETE_CLIENT: {
-      const _id = action.payload;
-      return {
-        ...state,
-        clients: state.clients?.filter((item) => item._id !== _id),
-      };
-    }
-    // case UPDATE_CLIENT: {
-    //   const client = action.payload;
+
+    /**
+     * A bug in here, `DeleteClientAction` is adding an ID directly to Reducer
+     * It doesn't switch in the `case`, putting on top will solve the problem but will create new
+     */
+    // case DELETE_CLIENT: {
     //   return {
     //     ...state,
-    //     ...updateClientState()
-    //   }
+    //     clients: action.payload,
+    //   };
     // }
+
+    case UPDATE_CLIENT: {
+      const client: Client = action.payload;
+      const clients = [...state.clients].filter(
+        (item) => item._id === client?._id
+      );
+
+      console.log('hello world!');
+      return {
+        ...state,
+        // clients: [...state.clients, client],
+      };
+    }
+
     default:
       return state;
   }
