@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './TableRows.module.scss';
 
 // types
@@ -6,14 +6,11 @@ import { EditableTable } from '.';
 import { Client } from '../../Actions/clients.action';
 
 // redux
-import { connect, useDispatch, useSelector } from 'react-redux';
-import { RootStore } from '../../Store';
+import { useDispatch } from 'react-redux';
 
 // actions
-import { ClientsAction } from '../../Actions/clients.action';
 import { DeleteClientAction } from '../../Actions/delete.action';
 import { UpdateClientAction } from '../../Actions/update.action';
-import Axios from 'axios';
 
 interface ITableRowsProp {
   clients: Client[];
@@ -29,7 +26,6 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
   const [data, setData] = useState<Client[]>();
   const dispatch = useDispatch();
 
-  const [test, setTest] = useState<Client[]>();
   const [state, set] = useState<EditableTable>({
     first_name: '',
     last_name: '',
@@ -62,12 +58,11 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
     const found = data?.find((item: Client) => {
       return item._id === _id;
     });
-
     const newBody = { ...found, ...state };
     const filteredData: any = data?.filter((item) => item._id !== _id);
     const finalData = [...filteredData, newBody];
     setData(finalData);
-    dispatch(UpdateClientAction(finalData)); // patch
+    dispatch(UpdateClientAction(newBody)); // [DISPATCH]
   };
 
   const onDelete = async (id: string) => {
