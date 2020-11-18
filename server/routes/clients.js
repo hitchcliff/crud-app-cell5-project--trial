@@ -15,16 +15,22 @@ const clientObject = (req) => {
     }
 }
 
-const sorting = (schema, val, order) => {
-    return schema.find({}).sort({
-       first_name: order 
-    }) 
-}
-
 // used to search text our document
 const escapeRegex = (text) => {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 };
+
+// sorting the documents
+const sorting = (schema, value) => {
+    return schema.find({}).sort(value) 
+}
+
+// check the order `asc` or `dsc`
+const checkOrder = (str) => {
+    const getLastStr = str.substring(str.length - 4, str.length);
+    return getLastStr === "_dsc" ? -1 : 0
+}
+
 
 // get all the clients
 router.get('/', async (req, res) => {
@@ -32,10 +38,33 @@ router.get('/', async (req, res) => {
         const search = req.query.search
         // if we have params search, we search for clients database
         if(search) {
+
+            // arrange in desc or asc order
             if(search === "first_dsc" || search === "first_asc") {
-                const order = search === "first_asc" ? 1 : 0;
-                const data = await sorting(Client, "first_name", order);
-                res.json(data)
+               const order = checkOrder(search);
+               const data = await sorting(Client, {first_name: order});
+               res.json(data)
+            } else if (search === "last_dsc" || search === "last_asc") {
+               const order = checkOrder(search);
+               const data = await sorting(Client, {last_name: order});
+               res.json(data)
+            } 
+            else if (search === "mobile_dsc" || search === "mobile_asc") {
+               const order = checkOrder(search);
+               const data = await sorting(Client, {mobile_number: order});
+               res.json(data)
+            } else if (search === "bills_asc" || search === "bills_dsc") {
+               const order = checkOrder(search);
+               const data = await sorting(Client, {bills: order});
+               res.json(data)
+            } else if (search === "gender_asc" || search === "gender_dsc") {
+               const order = checkOrder(search);
+               const data = await sorting(Client, {gender: order});
+               res.json(data) 
+            } else if (search === "paid_asc" || search === "paid_dsc") {
+               const order = checkOrder(search);
+               const data = await sorting(Client, {paid: order});
+               res.json(data)
             } else {
                 const regex = new RegExp(escapeRegex(search), 'gi')
                 const clients = await Client.find({
@@ -44,6 +73,8 @@ router.get('/', async (req, res) => {
                 res.json(clients)
             }
         } 
+        
+        // if all of the above didn't meet the req, then @returns all documents
         else {
             const clients = await Client.find(); 
             res.json(clients)
