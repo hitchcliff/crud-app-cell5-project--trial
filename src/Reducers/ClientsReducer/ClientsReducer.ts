@@ -1,4 +1,3 @@
-import { STATUS_CODES } from 'http';
 import { ClientsActionDispatchTypes } from '../../Actions/action.types';
 import { FETCH_CLIENTS, Client } from '../../Actions/clients.action';
 import { CREATE_CLIENT } from '../../Actions/create.action';
@@ -11,10 +10,16 @@ import { updateClientState } from './helpers';
 // all our listings state lives
 export const initialState: InitialStateProp = {
   clients: [],
+  persons: 0,
+  completed: 0,
+  billings: 0,
 };
 
 export interface InitialStateProp {
   clients?: Client[];
+  persons: number;
+  completed: number;
+  billings: number;
 }
 
 /**
@@ -22,19 +27,24 @@ export interface InitialStateProp {
  * @param state - Initial state
  * @param action - Dispatch types actions
  */
-export const ClientsReducer = (state = initialState, action: any) => {
+export const ClientsReducer = (
+  state = initialState,
+  action: ClientsActionDispatchTypes
+) => {
   switch (action.type) {
     case FETCH_CLIENTS: {
+      const clients: Client[] = action.payload;
       return {
         ...state,
-        clients: action.payload,
+        ...updateClientState(clients),
       };
     }
 
     case CREATE_CLIENT: {
+      const clients = [...state.clients, action.payload];
       return {
         ...state,
-        clients: !state ? action.payload : [...state.clients, action.payload],
+        ...updateClientState(clients),
       };
     }
 
@@ -42,12 +52,16 @@ export const ClientsReducer = (state = initialState, action: any) => {
      * A bug in here, `DeleteClientAction` is adding an ID directly to Reducer
      * It doesn't switch in the `case`, putting on top will solve the problem but will create new
      */
-    // case DELETE_CLIENT: {
-    //   return {
-    //     ...state,
-    //     clients: action.payload,
-    //   };
-    // }
+    case DELETE_CLIENT: {
+      const id = action.payload;
+      const clients = [...state.clients].filter(
+        (item: Client) => item._id !== id
+      );
+      return {
+        ...state,
+        ...updateClientState(clients),
+      };
+    }
 
     case UPDATE_CLIENT: {
       const client = action.payload; // new body
@@ -58,7 +72,7 @@ export const ClientsReducer = (state = initialState, action: any) => {
 
       return {
         ...state,
-        clients,
+        ...updateClientState(clients),
       };
     }
 

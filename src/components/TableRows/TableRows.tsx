@@ -13,7 +13,7 @@ import { DeleteClientAction } from '../../Actions/delete.action';
 import { UpdateClientAction } from '../../Actions/update.action';
 
 interface ITableRowsProp {
-  clients: Client[];
+  clients?: Client[];
 }
 
 /**
@@ -63,8 +63,8 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
      * We have to loop through our data to delete the state
      * TEMPORARY SOLUTION
      */
-    const newData = [...data].filter((item: Client) => item._id !== id);
-    setData(newData);
+    // const newData = [...data].filter((item: Client) => item._id !== id);
+    // setData(newData);
     dispatch(DeleteClientAction(id)); // [DISPATCH]
   };
 

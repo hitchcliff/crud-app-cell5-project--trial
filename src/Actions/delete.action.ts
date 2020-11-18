@@ -9,18 +9,18 @@ export const DeleteClientAction = (id: string) => async (
   try {
     await axios.delete(`http://localhost:5000/clients/${id}`);
 
-    // dispatch({
-    //   type: DELETE_CLIENT,
-    //   payload: data,
-    // });
+    dispatch({
+      type: DELETE_CLIENT,
+      payload: id,
+    });
   } catch (error) {
     console.log(error);
   }
 };
 
 // Constants FETCH_CLIENTS
-export const DELETE_CLIENT = 'CREATE_CLIENT';
+export const DELETE_CLIENT = 'DELETE_CLIENT';
 export interface DeleteClient {
   type: typeof DELETE_CLIENT;
-  payload: any;
+  payload: string;
 }
