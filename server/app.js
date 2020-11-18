@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express();
 const mongoose = require('mongoose')
+const cors = require('cors');
 
 // body parser
 app.use(express.urlencoded({ extended: true }));
@@ -10,6 +11,7 @@ app.use(express.json());
 const ClientRoute = require('./routes/clients');
 
 // middlewares 
+app.use(cors())
 app.use('/clients', ClientRoute);
 
 app.get('/', (_, res) => {
