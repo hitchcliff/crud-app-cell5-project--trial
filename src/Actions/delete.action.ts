@@ -1,7 +1,6 @@
 import { Dispatch } from 'react';
 import axios from 'axios';
 import { ClientsActionDispatchTypes } from './action.types';
-import { Client } from './clients.action';
 
 export const DeleteClientAction = (id: string) => async (
   dispatch: Dispatch<ClientsActionDispatchTypes>

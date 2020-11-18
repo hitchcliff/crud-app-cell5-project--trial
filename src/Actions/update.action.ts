@@ -1,8 +1,11 @@
 import axios from 'axios';
+import { Dispatch } from 'react';
+import { ClientsActionDispatchTypes } from './action.types';
 
-export const UpdateClientAction = (body: any) => async (dispatch: any) => {
+export const UpdateClientAction = (body: any) => async (
+  dispatch: Dispatch<ClientsActionDispatchTypes>
+) => {
   try {
-    console.log(body);
     await axios.patch(`http://localhost:5000/clients/${body._id}`, body);
     dispatch({
       type: UPDATE_CLIENT,

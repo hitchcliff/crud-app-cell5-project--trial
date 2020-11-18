@@ -2,6 +2,7 @@ import { ClientsActionDispatchTypes } from '../../Actions/action.types';
 import { FETCH_CLIENTS, Client } from '../../Actions/clients.action';
 import { CREATE_CLIENT } from '../../Actions/create.action';
 import { DELETE_CLIENT } from '../../Actions/delete.action';
+import { SEARCH_CLIENT } from '../../Actions/search.action';
 import { UPDATE_CLIENT } from '../../Actions/update.action';
 
 // helpers
@@ -48,10 +49,6 @@ export const ClientsReducer = (
       };
     }
 
-    /**
-     * A bug in here, `DeleteClientAction` is adding an ID directly to Reducer
-     * It doesn't switch in the `case`, putting on top will solve the problem but will create new
-     */
     case DELETE_CLIENT: {
       const id = action.payload;
       const clients = [...state.clients].filter(
@@ -76,6 +73,12 @@ export const ClientsReducer = (
       };
     }
 
+    case SEARCH_CLIENT: {
+      return {
+        ...state,
+        ...updateClientState(action.payload),
+      };
+    }
     default:
       return state;
   }

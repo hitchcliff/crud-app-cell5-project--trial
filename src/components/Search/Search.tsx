@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { SearchClientAction } from '../../Actions/search.action';
 import styles from './Search.module.scss';
 /**
  * Functional react component for congratulatory message.
@@ -6,6 +8,17 @@ import styles from './Search.module.scss';
  * @returns {JSX.Element} - Rendered component (or null if `success` prop is missing)
  */
 const Search = () => {
+  const [state, set] = useState('');
+  const dispatch = useDispatch();
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value;
+    set(value);
+    setTimeout(() => {
+      dispatch(SearchClientAction(state));
+    }, 1000);
+  };
+
   return (
     <div className={styles.search}>
       {/* a search input that has a `BEM` naming convention */}
@@ -14,6 +27,8 @@ const Search = () => {
         name="s"
         type="text"
         placeholder="Look for targets"
+        value={state}
+        onChange={(e) => onChange(e)}
       />
     </div>
   );
