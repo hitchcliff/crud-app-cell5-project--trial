@@ -31,6 +31,8 @@ body {
         width: 30%;
         background: $color2;
         padding: 50px;
+        height: 100vh;
+        overflow-y: scroll;
       }
 
       &__overview {
@@ -44,46 +46,32 @@ body {
   }
 }
 
-// ************** Generic Buttons & Inputs
-button,
-button:focus,
-button:visited,
-input,
-input:focus {
-  border: none;
-  outline: none;
+// ************* Generics
+@import './styles/generics';
+
+// ************* Media Query
+@media screen and (max-width: 1490px) {
+  .App {
+    &[data-theme='dark'] {
+      .container {
+        width: 90%;
+      }
+    }
+  }
 }
 
-button {
-  cursor: pointer;
-}
+// ************* Heading Media queries from `769` until `1200` only
+@import './styles/heading.media';
 
-// ************* Generic Input
-input {
-  font-size: $small;
-}
-
-// ************* Generic Heading Sizes
-h1 {
-  font-size: $large;
-}
-
-h2 {
-  font-size: $large;
-}
-
-h3 {
-  font-size: $medium;
-}
-
-h4 {
-  font-size: $medium;
-}
-
-h5 {
-  font-size: $medium;
-}
-
-p {
-  font-size: $small;
+@media screen and (max-width: 768px) {
+  .App {
+    &[data-theme='dark'] {
+      .container {
+        &__sidebar {
+          padding: 20px;
+          width: 100%;
+        }
+      }
+    }
+  }
 }

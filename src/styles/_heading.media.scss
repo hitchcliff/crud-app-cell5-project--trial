@@ -1,0 +1,29 @@
+@media screen and (max-width: 1200px) {
+  h1 {
+    font-size: $medium;
+  }
+  h2 {
+    font-size: $medium;
+  }
+  h3 {
+    font-size: $small;
+  }
+  h4 {
+    font-size: $small;
+  }
+  h5 {
+    font-size: $small;
+  }
+  p {
+    font-size: $xsmall;
+  }
+  span {
+    font-size: $xsmall;
+  }
+  input {
+    font-size: $xsmall;
+  }
+  button {
+    font-size: $xsmall;
+  }
+}

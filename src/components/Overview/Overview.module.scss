@@ -34,3 +34,12 @@
     }
   }
 }
+
+// ************* Media Query
+@media screen and (max-width: 980px) {
+  .overview {
+    .heading {
+      flex-wrap: wrap-reverse;
+    }
+  }
+}

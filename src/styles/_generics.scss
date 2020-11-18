@@ -1,0 +1,43 @@
+// ************** Generic Buttons & Inputs
+button,
+button:focus,
+button:visited,
+input,
+input:focus {
+  border: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+// ************* Generic Input
+input {
+  font-size: $small;
+}
+
+// ************* Generic Heading Sizes
+h1 {
+  font-size: $large;
+}
+
+h2 {
+  font-size: $large;
+}
+
+h3 {
+  font-size: $medium;
+}
+
+h4 {
+  font-size: $medium;
+}
+
+h5 {
+  font-size: $medium;
+}
+
+p {
+  font-size: $small;
+}

@@ -4,3 +4,11 @@
   padding: 30px;
   color: $color1;
 }
+
+// ************* Media Query
+@media screen and (max-width: 980px) {
+  .card {
+    padding: 10px;
+    width: 100%;
+  }
+}

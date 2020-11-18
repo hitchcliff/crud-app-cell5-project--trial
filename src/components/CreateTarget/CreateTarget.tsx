@@ -95,7 +95,7 @@ const CreateTarget = (props: any) => {
             className={styles.group__input}
             type="text"
             name="mobile_number"
-            placeholder="Contact number"
+            placeholder="Mobile"
             value={state?.mobile_number}
             onChange={(e) => onChange(e)}
           />

@@ -37,3 +37,14 @@
     }
   }
 }
+
+// ************* Media Query
+@media screen and (max-width: 1200px) {
+  .sorting {
+    .boxes {
+      .box {
+        padding: 10px;
+      }
+    }
+  }
+}
