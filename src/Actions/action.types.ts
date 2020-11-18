@@ -4,6 +4,7 @@ import { DeleteClient } from './delete.action';
 import { PaidClient } from './paid.action';
 import { SearchClient } from './search.action';
 import { SortClient } from './sort.action';
+import { UnPaidClient } from './unpaid.action';
 import { UpdateClient } from './update.action';
 
 export type ClientsActionDispatchTypes =
@@ -13,4 +14,5 @@ export type ClientsActionDispatchTypes =
   | UpdateClient
   | SearchClient
   | SortClient
-  | PaidClient;
+  | PaidClient
+  | UnPaidClient;

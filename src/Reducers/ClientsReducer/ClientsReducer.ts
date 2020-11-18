@@ -5,6 +5,7 @@ import { DELETE_CLIENT } from '../../Actions/delete.action';
 import { PAID_CLIENT } from '../../Actions/paid.action';
 import { SEARCH_CLIENT } from '../../Actions/search.action';
 import { SORT_CLIENT } from '../../Actions/sort.action';
+import { UNPAID_CLIENT } from '../../Actions/unpaid.action';
 import { UPDATE_CLIENT } from '../../Actions/update.action';
 
 // helpers
@@ -97,6 +98,22 @@ export const ClientsReducer = (
       );
 
       const newBody = { ...client, ...{ paid: true } };
+
+      const clients = [...modifiedClients, newBody];
+      return {
+        ...state,
+        ...updateClientState(clients),
+      };
+    }
+
+    case UNPAID_CLIENT: {
+      const _id = action.payload;
+      const client = [...state.clients].filter((item) => item._id === _id)[0];
+      const modifiedClients = [...state.clients].filter(
+        (item) => item._id !== client._id
+      );
+
+      const newBody = { ...client, ...{ paid: false } };
 
       const clients = [...modifiedClients, newBody];
       return {
