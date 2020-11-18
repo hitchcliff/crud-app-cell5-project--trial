@@ -1,3 +1,4 @@
+import { STATUS_CODES } from 'http';
 import { ClientsActionDispatchTypes } from '../../Actions/action.types';
 import { FETCH_CLIENTS, Client } from '../../Actions/clients.action';
 import { CREATE_CLIENT } from '../../Actions/create.action';
@@ -49,15 +50,15 @@ export const ClientsReducer = (state = initialState, action: any) => {
     // }
 
     case UPDATE_CLIENT: {
-      const client: Client = action.payload;
-      const clients = [...state.clients].filter(
-        (item) => item._id === client?._id
+      const client = action.payload; // new body
+      const filteredData: any = [...state.clients].filter(
+        (item) => item._id !== client._id
       );
+      const clients = [...filteredData, client];
 
-      console.log('hello world!');
       return {
         ...state,
-        // clients: [...state.clients, client],
+        clients,
       };
     }
 

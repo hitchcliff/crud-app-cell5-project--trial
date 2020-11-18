@@ -50,18 +50,10 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
   const onSave = (_id: string) => {
     setCurrentIndex(null); // reset
 
-    /**
-     * There is a bug when updating the `state` in `redux`.
-     * It is adding another input below the table once its Edited
-     * TEMPORARY SOLUTION
-     */
     const found = data?.find((item: Client) => {
       return item._id === _id;
     });
     const newBody = { ...found, ...state };
-    const filteredData: any = data?.filter((item) => item._id !== _id);
-    const finalData = [...filteredData, newBody];
-    setData(finalData);
     dispatch(UpdateClientAction(newBody)); // [DISPATCH]
   };
 
