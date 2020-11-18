@@ -1,12 +1,10 @@
 import {
-  ListingProperty,
   ClientsActionDispatchTypes,
   FETCH_CLIENTS,
   Client,
 } from '../../Actions/clients.action';
 
-// seems to be having problems with TS and Connect
-// This is just a workaround without using useSelectors hooks
+// all our listings state lives
 export const initialState: InitialStateProp = {};
 
 export interface InitialStateProp {
@@ -28,11 +26,12 @@ export const ClientsReducer = (
   switch (action.type) {
     case FETCH_CLIENTS: {
       const clients: Client[] = action.payload;
-      console.log(clients);
       return {
         ...state,
         clients,
         persons: clients.length,
+        completed: clients.filter((item) => item.paid === true).length, // filter the item that has an array then calculate the length
+        billings: clients.map((item) => item.bills).reduce((a, b) => a + b), // get all the bills and put it in to an array, then reduce it into 1 value
       };
     }
     default:

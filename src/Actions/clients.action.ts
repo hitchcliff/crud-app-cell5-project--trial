@@ -26,12 +26,6 @@ export interface FetchClients {
   payload: Client[];
 }
 
-export interface ListingProperty {
-  meta?: string;
-  params?: { deadline: string };
-  clients: Client[];
-}
-
 export interface Client {
   id: string;
   first_name: string;
