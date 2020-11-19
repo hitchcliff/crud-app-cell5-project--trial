@@ -53,7 +53,7 @@ const SortingOptions = () => {
   });
 
   return (
-    <div className={styles.sorting}>
+    <div data-test={`${active ? 'active' : ''}`} className={styles.sorting}>
       {/* heading */}
       <h4>Sorting options</h4>
 
