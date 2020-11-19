@@ -9,7 +9,7 @@ import { UNPAID_CLIENT } from '../../Actions/unpaid.action';
 import { UPDATE_CLIENT } from '../../Actions/update.action';
 
 // helpers
-import { updateClientState } from './helpers';
+import { updateClientState, updatePaymentClientState } from './helpers';
 
 // all our listings state lives
 export const initialState: InitialStateProp = {
@@ -92,33 +92,17 @@ export const ClientsReducer = (
 
     case PAID_CLIENT: {
       const _id = action.payload;
-      const client = [...state.clients].filter((item) => item._id === _id)[0];
-      const modifiedClients = [...state.clients].filter(
-        (item) => item._id !== client._id
-      );
-
-      const newBody = { ...client, ...{ paid: true } };
-
-      const clients = [...modifiedClients, newBody];
       return {
         ...state,
-        ...updateClientState(clients),
+        ...updatePaymentClientState(_id, [...state.clients], true),
       };
     }
 
     case UNPAID_CLIENT: {
       const _id = action.payload;
-      const client = [...state.clients].filter((item) => item._id === _id)[0];
-      const modifiedClients = [...state.clients].filter(
-        (item) => item._id !== client._id
-      );
-
-      const newBody = { ...client, ...{ paid: false } };
-
-      const clients = [...modifiedClients, newBody];
       return {
         ...state,
-        ...updateClientState(clients),
+        ...updatePaymentClientState(_id, [...state.clients], false),
       };
     }
     default:

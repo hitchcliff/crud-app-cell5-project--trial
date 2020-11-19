@@ -16,3 +16,27 @@ export const updateClientState = (clients: Client[]) => {
       .reduce((a, b) => a + b, 0), // get all the bills and put it in to an array, then reduce it into 1 value
   };
 };
+
+/**
+ * A helper function used to find and set the paid to either true or false
+ * @param _id - It accepts `id` as a first argument. Used to find an item inside Client
+ * @param currentState - It accepts `Client[]` type to be searched
+ * @param isPaid - Used to add `paid` to either `true` and `false`
+ * @returns {updateClientState} - Returns `updateClientState` function for Redux Store
+ */
+export const updatePaymentClientState = (
+  _id: string,
+  currentState: Client[],
+  isPaid: boolean
+) => {
+  const client = currentState.filter((item) => item._id === _id)[0];
+
+  const modifiedClients = currentState.filter(
+    (item) => item._id !== client._id
+  );
+
+  const newBody = { ...client, ...{ paid: isPaid } };
+
+  const clients = [...modifiedClients, newBody];
+  return updateClientState(clients);
+};
