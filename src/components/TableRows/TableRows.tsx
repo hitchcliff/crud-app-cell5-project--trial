@@ -168,7 +168,7 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
               type="text"
               name="bills"
               className={styles.body__input}
-              placeholder={client.bills.toString()}
+              placeholder={client.bills ? client.bills.toString() : undefined}
               value={state.bills}
               onChange={(e) => onChange(e)} // this is where the logic of adding new values in state
             />
