@@ -50,7 +50,7 @@ describe('SortingOptions component', () => {
     expect(buttonElement.length).not.toBe(0);
   });
 
-  test('button on click set a `string` value in state', () => {
+  test('button on click set a `active` value in state', () => {
     const buttonElement = findByTestAttr(wrapper, button);
     buttonElement.at(0).simulate('click');
     buttonElement.update();
