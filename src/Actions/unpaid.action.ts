@@ -2,7 +2,7 @@ import Axios from 'axios';
 import { Dispatch } from 'react';
 import { ClientsActionDispatchTypes } from './action.types';
 
-export const UnPaidClientAction = (_id: string, str: string) => async (
+export const UnPaidClientAction = (_id: string) => async (
   dispatch: Dispatch<ClientsActionDispatchTypes>
 ) => {
   try {

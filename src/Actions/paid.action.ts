@@ -2,11 +2,11 @@ import Axios from 'axios';
 import { Dispatch } from 'react';
 import { ClientsActionDispatchTypes } from './action.types';
 
-export const PaidClientAction = (_id: string, str: string) => async (
+export const PaidClientAction = (_id: string) => async (
   dispatch: Dispatch<ClientsActionDispatchTypes>
 ) => {
   try {
-    await Axios.patch(`http://localhost:5000/clients/${_id}`);
+    await Axios.patch(`http://localhost:5000/clients/paid/${_id}`);
     dispatch({
       type: PAID_CLIENT,
       payload: _id,

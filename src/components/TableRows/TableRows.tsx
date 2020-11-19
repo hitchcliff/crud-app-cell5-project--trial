@@ -13,6 +13,7 @@ import { DeleteClientAction } from '../../Actions/delete.action';
 import { UpdateClientAction } from '../../Actions/update.action';
 import { FormatNumber } from '../../helpers/helpers';
 import { PaidClientAction } from '../../Actions/paid.action';
+import { UnPaidClientAction } from '../../Actions/unpaid.action';
 
 interface ITableRowsProp {
   clients?: Client[];
@@ -25,6 +26,7 @@ interface ITableRowsProp {
  */
 const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
   const [currentIndex, setCurrentIndex] = useState<string | null>();
+  const [paid, setPaid] = useState<number | string>(); // used to toggle `paid` & `unpaid`
   const [data, setData] = useState<Client[]>();
   const dispatch = useDispatch();
 
@@ -49,14 +51,6 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
   };
 
   /**
-   * Runs once user clicked `C`
-   * @param {string} id - Accepts `ID` as an argument
-   */
-  const onPaid = (id: string) => {
-    dispatch(PaidClientAction(id, 'paid'));
-  };
-
-  /**
    * Runs once user clicked `S`
    * @param {string} _id - Accepts `ID` as an argument
    */
@@ -68,14 +62,6 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
     });
     const newBody = { ...found, ...state };
     dispatch(UpdateClientAction(newBody)); // [DISPATCH]
-  };
-
-  /**
-   * Runs once user clicked `D`
-   * @param {string} id - Accepts `ID` as an argument
-   */
-  const onDelete = async (id: string) => {
-    dispatch(DeleteClientAction(id)); // [DISPATCH]
   };
 
   /**
@@ -191,7 +177,7 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
           then updates the Redux State. Dispatch actions then sent to Reducers*/}
           <button
             className={styles.delete}
-            onClick={() => onDelete(client._id)}
+            onClick={() => dispatch(DeleteClientAction(client._id))}
           >
             D
           </button>
@@ -200,9 +186,18 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
           then updates the Redux State. Dispatch actions then sent to Reducers*/}
           <button
             className={client.paid ? styles.paid : styles.unPaid}
-            onClick={() => onPaid(client._id)}
+            onClick={() => dispatch(PaidClientAction(client._id))}
           >
-            C
+            P
+          </button>
+
+          {/* Sends HTTP Request to the Server to `incomplete` the item
+          then updates the Redux State. Dispatch actions then sent to Reducers*/}
+          <button
+            className={client.paid ? styles.paid : styles.unPaid}
+            onClick={() => dispatch(UnPaidClientAction(client._id))}
+          >
+            U
           </button>
         </td>
       </tr>
