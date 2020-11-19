@@ -1,4 +1,4 @@
-import { ShallowWrapper } from 'enzyme';
+import { ReactWrapper, ShallowWrapper } from 'enzyme';
 import { applyMiddleware, createStore } from 'redux';
 import RootReducer from '../Reducers';
 import { middleware } from '../Store';
@@ -10,7 +10,10 @@ import { middleware } from '../Store';
  * @param {string} value - Accepts `value` we need to find within
  * @returns {ShallowWrapper} - Returns the `element`
  */
-export const findByTestAttr = (wrapper: ShallowWrapper, value: string) => {
+export const findByTestAttr = (
+  wrapper: ShallowWrapper | ReactWrapper,
+  value: string
+) => {
   const component = wrapper.find(`[data-test="${value}"]`);
   return component;
 };

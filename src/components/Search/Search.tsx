@@ -12,7 +12,7 @@ const Search = () => {
   const dispatch = useDispatch();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.currentTarget.value;
+    const value = e.target.value;
     set(value);
     setTimeout(() => {
       dispatch(SearchClientAction(state));
@@ -23,6 +23,7 @@ const Search = () => {
     <div className={styles.search}>
       {/* a search input that has a `BEM` naming convention */}
       <input
+        data-test="input"
         className={styles.search__input}
         name="s"
         type="text"
