@@ -40,13 +40,13 @@ const CreateTarget = (props: any) => {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.currentTarget;
-    const name = target.name;
+    const name = target?.name;
     let value;
 
     if (name === 'bills') {
-      value = parseInt(target.value);
+      value = parseInt(target?.value);
     } else {
-      value = target.value;
+      value = target?.value;
     }
 
     // add a default paid to `false` that's why we are spreading here
@@ -66,6 +66,7 @@ const CreateTarget = (props: any) => {
       <form onSubmit={(e) => onSubmit(e)}>
         <div className={styles.group}>
           <input
+            data-test="input"
             className={styles.group__input}
             type="text"
             name="first_name"
@@ -74,6 +75,7 @@ const CreateTarget = (props: any) => {
             onChange={(e) => onChange(e)}
           />
           <input
+            data-test="input"
             className={styles.group__input}
             type="text"
             name="last_name"
@@ -84,6 +86,7 @@ const CreateTarget = (props: any) => {
         </div>
         <div className={styles.group}>
           <input
+            data-test="input"
             className={styles.group__input}
             type="text"
             name="gender"
@@ -92,6 +95,7 @@ const CreateTarget = (props: any) => {
             onChange={(e) => onChange(e)}
           />
           <input
+            data-test="input"
             className={styles.group__input}
             type="text"
             name="mobile_number"
@@ -102,6 +106,7 @@ const CreateTarget = (props: any) => {
         </div>
         <div className={styles.group}>
           <input
+            data-test="input"
             className={styles.group__input}
             type="number"
             name="bills"
