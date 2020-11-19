@@ -12,7 +12,9 @@ export const updateClientState = (clients: Client[]) => {
     persons: clients.length,
     completed: clients.filter((item) => item.paid === true).length, // filter the item that has an array then calculate the length
     billings: clients
-      .map((item) => (item.bills === null ? 0 : item.bills))
+      .map((item) =>
+        item.bills === null ? 0 : item.paid === false ? item.bills : 0
+      )
       .reduce((a, b) => a + b, 0), // get all the bills and put it in to an array, then reduce it into 1 value
   };
 };

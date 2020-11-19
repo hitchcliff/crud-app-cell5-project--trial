@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { act } from 'react-dom/test-utils';
-import { useDispatch } from 'react-redux';
+import styles from './SortingOptions.module.scss';
+
 import { IBoxSwitchesType } from '.';
 import { SortClientAction } from '../../Actions/sort.action';
+
 import { BoxSwitches } from './data';
-import styles from './SortingOptions.module.scss';
+import { useDispatch } from 'react-redux';
 
 /**
  * Functional react component for congratulatory message.
@@ -38,9 +39,10 @@ const SortingOptions = () => {
 
   const mapBoxesSwitches = BoxSwitches.map((item) => {
     return (
-      <div key={item.id} className={styles.box}>
+      <div data-test="box" key={item.id} className={styles.box}>
         <p>{item.title}</p>
         <button
+          data-test="button"
           className={
             active === item.id ? styles.box__switchActive : styles.box__switch
           }
@@ -60,4 +62,5 @@ const SortingOptions = () => {
     </div>
   );
 };
+
 export default SortingOptions;

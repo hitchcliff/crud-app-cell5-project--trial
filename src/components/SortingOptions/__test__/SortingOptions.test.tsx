@@ -1,8 +1,10 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-import { shallow, ShallowWrapper } from 'enzyme';
+import { mount, shallow, ShallowWrapper } from 'enzyme';
 
 import SortingOptions from '../SortingOptions';
+import { findByTestAttr, storeFactory } from '../../../test/helper';
+import { Provider } from 'react-redux';
 
 /**
  * Factory function to create a shallow wrapper for App components
@@ -12,15 +14,36 @@ import SortingOptions from '../SortingOptions';
  * @returns {ShallowWrapper}
  */
 const setup: any = (props: {}, state: any) => {
-  const wrapper: ShallowWrapper<ReactElement> = shallow(
-    <SortingOptions {...props} />
+  const store = storeFactory(state);
+  const wrapper = mount(
+    <Provider store={store}>
+      <SortingOptions />
+    </Provider>
   );
+
   return wrapper;
 };
 
 describe('SortingOptions component', () => {
+  const box = 'box';
+  const button = 'button';
+  let wrapper: ShallowWrapper;
+
+  beforeEach(() => {
+    wrapper = setup();
+  });
+
   test('component render correctly', () => {
-    const wrapper = setup();
     expect(wrapper).toBeTruthy();
+  });
+
+  test('box element that holds the switches', () => {
+    const boxElement = findByTestAttr(wrapper, box);
+    expect(boxElement.length).not.toBe(0);
+  });
+
+  test('button element', () => {
+    const buttonElement = findByTestAttr(wrapper, button);
+    expect(buttonElement.length).not.toBe(0);
   });
 });

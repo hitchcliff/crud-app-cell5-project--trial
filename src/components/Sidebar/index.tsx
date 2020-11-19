@@ -1,7 +1,7 @@
 import React from 'react';
 import CreateTarget from '../CreateTarget/CreateTarget';
 import Search from '../Search/Search';
-import Sorting from '../SortingOptions/SortingOptions';
+import SortingOptions from '../SortingOptions/SortingOptions';
 import styles from './index.module.scss';
 
 /**
@@ -20,7 +20,7 @@ const Sidebar = () => {
 
       {/* minor components */}
       <div className={styles.sidebar_filters}>
-        <Sorting />
+        <SortingOptions />
         <CreateTarget />
         <Search />
       </div>
