@@ -11,9 +11,10 @@ import { useDispatch } from 'react-redux';
 // actions
 import { DeleteClientAction } from '../../Actions/delete.action';
 import { UpdateClientAction } from '../../Actions/update.action';
-import { FormatNumber } from '../../helpers/helpers';
 import { PaidClientAction } from '../../Actions/paid.action';
 import { UnPaidClientAction } from '../../Actions/unpaid.action';
+
+import { checkNumberValidation, FormatNumber } from '../../helpers/helpers';
 
 interface ITableRowsProp {
   clients?: Client[];
@@ -43,6 +44,11 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
     setData(clients);
   }, [clients]);
 
+  /**
+   * A function that tracks the changes from the user.
+   * Sets the `[name]: value` from the state
+   * @param e - Accepts event as an `args`
+   */
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.currentTarget;
     let value = target.value;
@@ -67,6 +73,8 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
     });
 
     const newBody = { ...found, ...state };
+    const isValid = checkNumberValidation(newBody);
+    if (!isValid) return;
     dispatch(UpdateClientAction(newBody)); // [DISPATCH]
   };
 

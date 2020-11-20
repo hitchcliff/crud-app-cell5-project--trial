@@ -1,3 +1,5 @@
+import { Client } from '../Actions/clients.action';
+
 /**
  * A Helper function that sits in Root to Format number
  * @function
@@ -53,4 +55,24 @@ export const isString = (value: any) => {
 export const isGender = (value: any) => {
   const val = value.toLowerCase();
   return val === 'male' || val === 'female' || !value ? true : false;
+};
+
+/**
+ * A simple function that checkes whether the value is numeric or not
+ * @function
+ * @param value - Accepts a string
+ */
+const isNumeric = (value: any) => {
+  return /^-?\d+$/.test(value);
+};
+
+/**
+ * A function that validates the `user` inputs
+ * @function
+ * @param state - Accepts a `state` that has a type of `Client` as an args.
+ * @returns - This returns `true` or `false` if we are going to proceed dispatching action
+ */
+export const checkNumberValidation = (state: any) => {
+  const { bills } = state;
+  return isNumeric(bills);
 };
