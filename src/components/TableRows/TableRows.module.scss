@@ -28,6 +28,41 @@
     button {
       background: white;
       padding: 5px;
+      font-weight: bold;
+    }
+
+    // ******* Edit Button
+    .edit {
+      &:hover {
+        background: green;
+        color: white;
+      }
+    }
+    .save {
+      background: green;
+      color: white;
+    }
+
+    // ******* Delete Button
+    .delete {
+      &:hover {
+        background: red;
+        color: white;
+      }
+    }
+
+    // ******* Paid
+    .unPaid {
+      &:hover {
+        background: red;
+        color: white;
+      }
+    }
+    .paid {
+      &:hover {
+        background: green;
+        color: white;
+      }
     }
   }
 }
