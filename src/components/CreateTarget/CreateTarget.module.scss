@@ -9,6 +9,20 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-gap: 10px;
+
+      // ******* `&s` is equal to `.groups`
+      &s {
+        position: relative;
+        .group__label {
+          font-size: 10px;
+          margin-left: 5px;
+          border-bottom: 1px solid red;
+          padding: 3px;
+          transition: all 0.3s ease;
+        }
+      }
+
+      // did this on purpose for positioning of the errors
       &__input {
         width: 100%;
         margin: 5px;

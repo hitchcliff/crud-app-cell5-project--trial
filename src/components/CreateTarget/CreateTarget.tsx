@@ -114,8 +114,10 @@ const CreateTarget = (props: any) => {
       {/* group__input is the `BEM` class to each Inputs */}
       <form onSubmit={(e) => onSubmit(e)}>
         <div className={styles.group}>
-          <div>
-            <div className={styles.group__label}>{state.first_name_error}</div>
+          <div className={styles.groups}>
+            {/* error */}
+            {state.first_name_error ? <div className={styles.group__label}>{state.first_name_error}</div> : null}
+            {/* actual input */}
             <input
               data-test="input"
               className={styles.group__input}
@@ -126,8 +128,10 @@ const CreateTarget = (props: any) => {
               onChange={(e) => onChange(e)}
             />
           </div>
-          <div>
-            <div className={styles.group__label}>{state.last_name_error}</div>
+          <div className={styles.groups}>
+            {/* error */}
+            {state.last_name_error ? <div className={styles.group__label}>{state.last_name_error}</div> : null}
+            {/* actual input */}
             <input
               data-test="input"
               className={styles.group__input}
@@ -140,8 +144,10 @@ const CreateTarget = (props: any) => {
           </div>
         </div>
         <div className={styles.group}>
-          <div>
-            <div className={styles.group__label}>{state.gender_error}</div>
+          <div className={styles.groups}>
+            {/* error */}
+            {state.gender_error ? <div className={styles.group__label}>{state.gender_error}</div> : null}
+            {/* actual input */}
             <input
               data-test="input"
               className={styles.group__input}
@@ -152,8 +158,10 @@ const CreateTarget = (props: any) => {
               onChange={(e) => onChange(e)}
             />
           </div>
-          <div>
-            <div className={styles.group__label}>{state.mobile_error}</div>
+          <div className={styles.groups}>
+            {/* error */}
+            {state.mobile_error ? <div className={styles.group__label}>{state.mobile_error}</div> : null}
+            {/* actual input */}
             <input
               data-test="input"
               className={styles.group__input}
@@ -166,8 +174,10 @@ const CreateTarget = (props: any) => {
           </div>
         </div>
         <div className={styles.group}>
-          <div>
-            <div className={styles.group__label}>{state.bills_error}</div>
+          <div className={styles.groups}>
+            {/* error */}
+            {state.bills_error ? <div className={styles.group__label}>{state.bills_error}</div> : null}
+            {/* actual input */}
             <input
               data-test="input"
               className={styles.group__input}
