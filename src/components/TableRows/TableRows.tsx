@@ -193,8 +193,9 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
           {/* Sends HTTP Request to the Server to `complete` the item
           then updates the Redux State. Dispatch actions then sent to Reducers*/}
           <button
-            className={client.paid ? styles.paid : styles.unPaid}
+            className={styles.paid}
             onClick={() => dispatch(PaidClientAction(client._id))}
+            disabled={client.paid ? true : false}
           >
             P
           </button>
@@ -202,8 +203,9 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
           {/* Sends HTTP Request to the Server to `incomplete` the item
           then updates the Redux State. Dispatch actions then sent to Reducers*/}
           <button
-            className={client.paid ? styles.paid : styles.unPaid}
+            className={styles.unPaid}
             onClick={() => dispatch(UnPaidClientAction(client._id))}
+            disabled={client.paid ? false : true}
           >
             U
           </button>
