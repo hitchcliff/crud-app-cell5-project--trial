@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ClientsAction } from '../../Actions/clients.action';
 import { SearchClientAction } from '../../Actions/search.action';
@@ -18,7 +18,6 @@ const Search = () => {
     setTimeout(() => {
       // if value is empty, call clientsaction
       if (value === '') return dispatch(ClientsAction());
-      dispatch(SearchClientAction(state));
     }, 1000);
   };
 
@@ -34,6 +33,12 @@ const Search = () => {
         value={state}
         onChange={(e) => onChange(e)}
       />
+      <button
+        className={styles.search__button}
+        onClick={() => dispatch(SearchClientAction(state))}
+      >
+        Search
+      </button>
     </div>
   );
 };
