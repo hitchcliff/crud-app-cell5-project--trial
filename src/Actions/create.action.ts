@@ -4,11 +4,17 @@ import { EditableTable } from '../components/TableRows';
 import { ClientsActionDispatchTypes } from './action.types';
 import { Client } from './clients.action';
 
-export const CreateClientAction = (value: EditableTable) => async (
-  dispatch: Dispatch<ClientsActionDispatchTypes>
-) => {
+export const CreateClientAction = (value: EditableTable) => async (dispatch: Dispatch<ClientsActionDispatchTypes>) => {
   try {
-    const { data } = await axios.post('http://localhost:5000/clients', value);
+    const obj: EditableTable = {
+      first_name: value.first_name,
+      last_name: value.last_name,
+      mobile_number: value.mobile_number,
+      gender: value.gender,
+      bills: value.bills,
+      paid: value.paid,
+    };
+    const { data } = await axios.post('http://localhost:5000/clients', obj);
     dispatch({
       type: CREATE_CLIENT,
       payload: data,

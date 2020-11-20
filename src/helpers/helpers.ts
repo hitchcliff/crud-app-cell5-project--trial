@@ -21,7 +21,7 @@ export const FormatNumber = (num: number) => {
  * @returns  {boolean} - It return either `true` or `false`
  */
 export const isEmpty = (value: any) => {
-  return value === '' || !value ? true : false;
+  return !value || value === '' ? true : false;
 };
 
 /**
@@ -31,7 +31,7 @@ export const isEmpty = (value: any) => {
  * @returns {boolean} = It return either `true` or `false`
  */
 export const isNumber = (value: any) => {
-  return typeof value !== 'number' ? false : true;
+  return typeof value !== 'number' || value === null ? false : true;
 };
 
 /**
@@ -41,7 +41,7 @@ export const isNumber = (value: any) => {
  * @returns {boolean} - It return either `true` or `false`
  */
 export const isString = (value: any) => {
-  return typeof value !== 'string' ? false : true;
+  return typeof value !== 'string' || value === null ? false : true;
 };
 
 /**
@@ -52,6 +52,5 @@ export const isString = (value: any) => {
  */
 export const isGender = (value: any) => {
   const val = value.toLowerCase();
-  if (val === 'male' || val === 'female') return true;
-  return false;
+  return val === 'male' || val === 'female' || !value ? true : false;
 };

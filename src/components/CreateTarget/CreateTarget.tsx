@@ -15,6 +15,11 @@ const defaultState = {
   mobile_number: '',
   bills: '',
   gender: '',
+  first_name_error: '',
+  last_name_error: '',
+  gender_error: '',
+  bills_error: '',
+  mobile_error: '',
   paid: false, // by default, newly added clients are `not` paid
 };
 
@@ -24,8 +29,7 @@ const defaultState = {
  * @returns {JSX.Element} - Rendered component (or null if `success` prop is missing)
  */
 const CreateTarget = (props: any) => {
-  const [state, set] = useState<EditableTable | null>(defaultState);
-  const [error, setError] = useState<EditableTable | null>(defaultState);
+  const [state, set] = useState<EditableTable | any>(defaultState);
 
   /**
    * A function that validates the form inputs.
@@ -34,55 +38,53 @@ const CreateTarget = (props: any) => {
    * @param obj - Takes a type `EditableTable | null` as `args`
    * @returns {boolean} - Returns either tru or false
    */
-  const validate = (obj: EditableTable | null) => {
-    const errors: EditableTable = {
-      first_name: '',
-      last_name: '',
-      mobile_number: '',
-      bills: '',
-      gender: '',
-    };
+  const validate = () => {
+    let first_name_error = '';
+    let last_name_error = '';
+    let gender_error = '';
+    let bills_error = '';
+    let mobile_error = '';
+    const empty = 'should not be empty';
 
-    if (isEmpty(obj?.first_name)) {
-      errors.first_name = 'should not be empty';
+    if (isEmpty(state?.first_name)) {
+      first_name_error = empty;
     }
 
-    if (isEmpty(obj?.last_name)) {
-      errors.last_name = 'should not be empty';
+    if (isEmpty(state?.last_name)) {
+      last_name_error = empty;
     }
 
-    if (isEmpty(obj?.mobile_number)) {
-      errors.mobile_number = 'should not be empty';
+    if (isEmpty(state?.mobile_number)) {
+      mobile_error = empty;
+    }
+    if (isEmpty(state?.gender) || !isGender(state?.gender)) {
+      gender_error = 'should be mail or female';
     }
 
-    if (isEmpty(obj?.bills) || !isNumber(obj?.bills)) {
-      errors.bills = 'bills must be a number';
+    if (isEmpty(state?.bills) || !isNumber(state?.bills)) {
+      bills_error = 'should be a number';
     }
 
-    if (isEmpty(obj?.gender) || isGender(obj?.gender)) {
-      errors.gender = 'gender must be either male or female';
-    }
-
-    setError(errors);
-    if (
-      errors.bills !== '' ||
-      errors.first_name !== '' ||
-      errors.last_name !== '' ||
-      errors.gender !== '' ||
-      errors.mobile_number !== ''
-    )
+    if (first_name_error || last_name_error || gender_error || bills_error || mobile_error) {
+      set({
+        ...state,
+        first_name_error,
+        last_name_error,
+        gender_error,
+        bills_error,
+        mobile_error,
+      });
       return false;
+    }
     return true;
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const isValid = validate(state);
-    console.log(error, isValid);
-    if (isValid) return;
-
-    props.CreateClientAction(state);
-    set(defaultState); // simple reset once form submit
+    if (validate()) {
+      props.CreateClientAction(state);
+      set(defaultState); // simple reset once form submit
+    }
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
