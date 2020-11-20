@@ -9,8 +9,9 @@ import { EditableTable } from '../TableRows';
 
 import { CreateClientAction } from '../../Actions/create.action';
 import { isEmpty, isGender, isNumber, isString } from '../../helpers/helpers';
+import InputErrors from '../InputErrors/InputErrors';
 
-const defaultState = {
+const defaultState: CreateTargetDefaultState = {
   first_name: '',
   last_name: '',
   mobile_number: '',
@@ -23,6 +24,15 @@ const defaultState = {
   mobile_error: '',
   paid: false, // by default, newly added clients are `not` paid
 };
+
+export interface CreateTargetDefaultState extends EditableTable {
+  first_name_error: string;
+  last_name_error: string;
+  gender_error: string;
+  bills_error: string;
+  mobile_error: string;
+  paid: boolean; // by default, newly added clients are `not` paid
+}
 
 /**
  * Functional react component for congratulatory message.
@@ -48,15 +58,15 @@ const CreateTarget = (props: any) => {
     const empty = 'should not be empty';
 
     if (isEmpty(state?.first_name)) {
-      first_name_error = empty;
+      first_name_error = 'first name ' + empty;
     }
 
     if (isEmpty(state?.last_name)) {
-      last_name_error = empty;
+      last_name_error = 'last name ' + empty;
     }
 
     if (isEmpty(state?.mobile_number)) {
-      mobile_error = empty;
+      mobile_error = 'mobile number ' + empty;
     }
     if (isEmpty(state?.gender) || !isGender(state?.gender)) {
       gender_error = 'should be mail or female';
@@ -121,101 +131,66 @@ const CreateTarget = (props: any) => {
       {/* group__input is the `BEM` class to each Inputs */}
       <form onSubmit={(e) => onSubmit(e)}>
         <div className={styles.group}>
-          <div className={styles.groups}>
-            {/* error */}
-            {state.first_name_error ? (
-              <div
-                className={
-                  state.first_name_error
-                    ? styles.group__labelActive
-                    : styles.group__labelHidden
-                }
-              >
-                {state.first_name_error}
-              </div>
-            ) : null}
-            {/* actual input */}
-            <input
-              data-test="input"
-              className={styles.group__input}
-              type="text"
-              name="first_name"
-              placeholder="First name"
-              value={state?.first_name}
-              onChange={(e) => onChange(e)}
-            />
-          </div>
-          <div className={styles.groups}>
-            {/* error */}
-            {state.last_name_error ? (
-              <div className={styles.group__label}>{state.last_name_error}</div>
-            ) : null}
-            {/* actual input */}
-            <input
-              data-test="input"
-              className={styles.group__input}
-              type="text"
-              name="last_name"
-              placeholder="Last name"
-              value={state?.last_name}
-              onChange={(e) => onChange(e)}
-            />
-          </div>
+          {/* actual input */}
+          <input
+            data-test="input"
+            className={styles.group__input}
+            type="text"
+            name="first_name"
+            placeholder="First name"
+            value={state?.first_name}
+            onChange={(e) => onChange(e)}
+          />
+          {/* actual input */}
+          <input
+            data-test="input"
+            className={styles.group__input}
+            type="text"
+            name="last_name"
+            placeholder="Last name"
+            value={state?.last_name}
+            onChange={(e) => onChange(e)}
+          />
         </div>
         <div className={styles.group}>
-          <div className={styles.groups}>
-            {/* error */}
-            {state.gender_error ? (
-              <div className={styles.group__label}>{state.gender_error}</div>
-            ) : null}
-            {/* actual input */}
-            <input
-              data-test="input"
-              className={styles.group__input}
-              type="text"
-              name="gender"
-              placeholder="Gender"
-              value={state?.gender}
-              onChange={(e) => onChange(e)}
-            />
-          </div>
-          <div className={styles.groups}>
-            {/* error */}
-            {state.mobile_error ? (
-              <div className={styles.group__label}>{state.mobile_error}</div>
-            ) : null}
-            {/* actual input */}
-            <input
-              data-test="input"
-              className={styles.group__input}
-              type="text"
-              name="mobile_number"
-              placeholder="Mobile"
-              value={state?.mobile_number}
-              onChange={(e) => onChange(e)}
-            />
-          </div>
+          {/* actual input */}
+          <input
+            data-test="input"
+            className={styles.group__input}
+            type="text"
+            name="gender"
+            placeholder="Gender"
+            value={state?.gender}
+            onChange={(e) => onChange(e)}
+          />
+          {/* actual input */}
+          <input
+            data-test="input"
+            className={styles.group__input}
+            type="text"
+            name="mobile_number"
+            placeholder="Mobile"
+            value={state?.mobile_number}
+            onChange={(e) => onChange(e)}
+          />
         </div>
         <div className={styles.group}>
-          <div className={styles.groups}>
-            {/* error */}
-            {state.bills_error ? (
-              <div className={styles.group__label}>{state.bills_error}</div>
-            ) : null}
-            {/* actual input */}
-            <input
-              data-test="input"
-              className={styles.group__input}
-              type="number"
-              name="bills"
-              placeholder="Bills"
-              value={state?.bills}
-              onChange={(e) => onChange(e)}
-            />
-          </div>
+          {/* actual input */}
+          <input
+            data-test="input"
+            className={styles.group__input}
+            type="number"
+            name="bills"
+            placeholder="Bills"
+            value={state?.bills}
+            onChange={(e) => onChange(e)}
+          />
           <Buttons isTypeSubmit text="Submit" />
         </div>
       </form>
+
+      {/* Input Errors */}
+      <InputErrors errors={state} />
     </div>
   );
 };
