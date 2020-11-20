@@ -15,7 +15,7 @@ const Sidebar = () => {
       {/* header */}
       <div className={styles.sidebar__header}>
         <h1>Bomberman</h1>
-        <p>We don’t bomb people, but we keep your payments.</p>
+        <p>We don’t bomb people, we only keep your payments.</p>
       </div>
 
       {/* minor components */}
