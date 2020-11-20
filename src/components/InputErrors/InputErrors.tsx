@@ -3,8 +3,7 @@ import styles from './InputErrors.module.scss';
 
 import { CreateTargetDefaultState } from '../CreateTarget/CreateTarget';
 
-import { myConfig } from '../Buttons/Buttons';
-import { useSpring, animated } from 'react-spring';
+import { useSpring, animated, config } from 'react-spring';
 interface IInputErrorsProp {
   errors: CreateTargetDefaultState;
   state: boolean;
@@ -24,8 +23,8 @@ const InputErrors = ({ errors, state }: IInputErrorsProp) => {
   } = errors;
 
   const spring = useSpring({
-    transform: state ? `translateY(30px)` : `translateY(0px)`,
-    config: myConfig,
+    transform: state ? `translateY(10px)` : `translateY(0px)`,
+    config: config.wobbly,
   });
 
   return (
