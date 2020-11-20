@@ -69,11 +69,11 @@ const CreateTarget = (props: any) => {
       mobile_error = 'mobile number ' + empty;
     }
     if (isEmpty(state?.gender) || !isGender(state?.gender)) {
-      gender_error = 'should be mail or female';
+      gender_error = 'gender should be mail or female';
     }
 
     if (isEmpty(state?.bills) || !isNumber(state?.bills)) {
-      bills_error = 'should be a number';
+      bills_error = 'bills should be a number';
     }
 
     if (
@@ -190,7 +190,18 @@ const CreateTarget = (props: any) => {
       </form>
 
       {/* Input Errors */}
-      <InputErrors errors={state} />
+      <InputErrors
+        state={
+          state.first_name_error ||
+          state.last_name_error ||
+          state.mobile_error ||
+          state.bills_error ||
+          state.gender_error
+            ? true
+            : false
+        }
+        errors={state}
+      />
     </div>
   );
 };
