@@ -2,6 +2,13 @@ import axios from 'axios';
 import { Dispatch } from 'react';
 import { ClientsActionDispatchTypes } from './action.types';
 
+/**
+ * A function that accepts `body` as an `args`
+ * The body represents the objects of the actual data in the table.
+ * This creator will send an HTTP `patch` request through Rest API
+ * @function
+ * @param body
+ */
 export const UpdateClientAction = (body: any) => async (
   dispatch: Dispatch<ClientsActionDispatchTypes>
 ) => {

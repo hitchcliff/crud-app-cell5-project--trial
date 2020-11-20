@@ -4,7 +4,16 @@ import { EditableTable } from '../components/TableRows';
 import { ClientsActionDispatchTypes } from './action.types';
 import { Client } from './clients.action';
 
-export const CreateClientAction = (value: EditableTable) => async (dispatch: Dispatch<ClientsActionDispatchTypes>) => {
+/**
+ * A function that accepts `value` as an `args`
+ * The `value` represents the actual data from the Form inputs in `CreateTarget.tsx`
+ * This creator will send an HTTP `post` request through Rest API
+ * @function
+ * @param {EditableTable} value - Accepts ID as an `args`
+ */
+export const CreateClientAction = (value: EditableTable) => async (
+  dispatch: Dispatch<ClientsActionDispatchTypes>
+) => {
   try {
     const obj: EditableTable = {
       first_name: value.first_name,

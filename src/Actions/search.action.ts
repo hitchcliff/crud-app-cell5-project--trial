@@ -3,6 +3,13 @@ import { Dispatch } from 'react';
 import { ClientsActionDispatchTypes } from './action.types';
 import { Client } from './clients.action';
 
+/**
+ * A function that accepts `s` as an `args`
+ * The `s` represents the string that will be search within database.
+ * This creator will send an HTTP `get` request through Rest API
+ * @function
+ * @param _id - Accepts ID as an `args`
+ */
 export const SearchClientAction = (s: string) => async (
   dispatch: Dispatch<ClientsActionDispatchTypes>
 ) => {

@@ -3,6 +3,13 @@ import { Dispatch } from 'react';
 import { ClientsActionDispatchTypes } from './action.types';
 import { Client } from './clients.action';
 
+/**
+ * A function that accepts `s` as an `args`
+ * The ID represents the `s` args will be used to Sort the actual data in the table.
+ * This creator will send an HTTP `get` request through Rest API
+ * @function
+ * @param s - Accepts ID as an `args` and has type of `string`
+ */
 export const SortClientAction = (s: string) => async (
   dispatch: Dispatch<ClientsActionDispatchTypes>
 ) => {

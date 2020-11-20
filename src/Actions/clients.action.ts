@@ -3,7 +3,10 @@ import { Dispatch } from 'react';
 import { ClientsActionDispatchTypes } from './action.types';
 
 /**
- * This is a `ClientsAction`, the one who will req. HTTP in the Server
+ * A function that that sends `get` request to the server
+ * Which then will be presented in the Table
+ * @function
+ * @param _id - Accepts ID as an `args`
  */
 export const ClientsAction = () => async (
   dispatch: Dispatch<ClientsActionDispatchTypes>
