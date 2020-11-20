@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './CreateTarget.module.scss';
+import cx from 'classnames';
 
 import Buttons from '../Buttons/Buttons';
 
@@ -65,7 +66,13 @@ const CreateTarget = (props: any) => {
       bills_error = 'should be a number';
     }
 
-    if (first_name_error || last_name_error || gender_error || bills_error || mobile_error) {
+    if (
+      first_name_error ||
+      last_name_error ||
+      gender_error ||
+      bills_error ||
+      mobile_error
+    ) {
       set({
         ...state,
         first_name_error,
@@ -116,7 +123,17 @@ const CreateTarget = (props: any) => {
         <div className={styles.group}>
           <div className={styles.groups}>
             {/* error */}
-            {state.first_name_error ? <div className={styles.group__label}>{state.first_name_error}</div> : null}
+            {state.first_name_error ? (
+              <div
+                className={
+                  state.first_name_error
+                    ? styles.group__labelActive
+                    : styles.group__labelHidden
+                }
+              >
+                {state.first_name_error}
+              </div>
+            ) : null}
             {/* actual input */}
             <input
               data-test="input"
@@ -130,7 +147,9 @@ const CreateTarget = (props: any) => {
           </div>
           <div className={styles.groups}>
             {/* error */}
-            {state.last_name_error ? <div className={styles.group__label}>{state.last_name_error}</div> : null}
+            {state.last_name_error ? (
+              <div className={styles.group__label}>{state.last_name_error}</div>
+            ) : null}
             {/* actual input */}
             <input
               data-test="input"
@@ -146,7 +165,9 @@ const CreateTarget = (props: any) => {
         <div className={styles.group}>
           <div className={styles.groups}>
             {/* error */}
-            {state.gender_error ? <div className={styles.group__label}>{state.gender_error}</div> : null}
+            {state.gender_error ? (
+              <div className={styles.group__label}>{state.gender_error}</div>
+            ) : null}
             {/* actual input */}
             <input
               data-test="input"
@@ -160,7 +181,9 @@ const CreateTarget = (props: any) => {
           </div>
           <div className={styles.groups}>
             {/* error */}
-            {state.mobile_error ? <div className={styles.group__label}>{state.mobile_error}</div> : null}
+            {state.mobile_error ? (
+              <div className={styles.group__label}>{state.mobile_error}</div>
+            ) : null}
             {/* actual input */}
             <input
               data-test="input"
@@ -176,7 +199,9 @@ const CreateTarget = (props: any) => {
         <div className={styles.group}>
           <div className={styles.groups}>
             {/* error */}
-            {state.bills_error ? <div className={styles.group__label}>{state.bills_error}</div> : null}
+            {state.bills_error ? (
+              <div className={styles.group__label}>{state.bills_error}</div>
+            ) : null}
             {/* actual input */}
             <input
               data-test="input"
