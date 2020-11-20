@@ -13,10 +13,22 @@ export const UpdateClientAction = (body: any) => async (
   dispatch: Dispatch<ClientsActionDispatchTypes>
 ) => {
   try {
-    await axios.patch(`http://localhost:5000/clients/${body._id}`, body);
+    const transformBody = {
+      _id: body._id,
+      first_name: body.first_name,
+      last_name: body.last_name,
+      mobile_number: body.mobile_number,
+      bills: parseInt(body.bills),
+      gender: body.gender,
+      paid: body.paid,
+    };
+    await axios.patch(
+      `http://localhost:5000/clients/${transformBody._id}`,
+      transformBody
+    );
     dispatch({
       type: UPDATE_CLIENT,
-      payload: body,
+      payload: transformBody,
     });
   } catch (error) {
     console.log(error);

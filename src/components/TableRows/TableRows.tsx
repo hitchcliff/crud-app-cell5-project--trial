@@ -37,7 +37,7 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
   const [data, setData] = useState<Client[]>();
   const dispatch = useDispatch();
 
-  const [state, set] = useState<EditableTable>(EditableTableObject); // new values temporarily stored
+  const [state, set] = useState<EditableTable>(EditableTableObject);
 
   useEffect(() => {
     setData(clients);
@@ -45,14 +45,12 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.currentTarget;
-    let value;
+    let value = target.value;
     const name = target.name;
 
-    if (name === 'bills') {
-      value = parseInt(target.value);
-    }
-
-    set({ [name]: value });
+    set({
+      [name]: value,
+    });
   };
 
   /**
@@ -103,7 +101,6 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
               name="gender"
               className={styles.body__input}
               placeholder={client.gender}
-              value={state.gender}
               onChange={(e) => onChange(e)} // this is where the logic of adding new values in state
             />
           ) : (
@@ -118,7 +115,6 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
               name="first_name"
               className={styles.body__input}
               placeholder={client.first_name}
-              value={state.first_name}
               onChange={(e) => onChange(e)} // this is where the logic of adding new values in state
             />
           ) : (
@@ -133,7 +129,6 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
               name="last_name"
               className={styles.body__input}
               placeholder={client.last_name}
-              value={state.last_name}
               onChange={(e) => onChange(e)} // this is where the logic of adding new values in state
             />
           ) : (
@@ -148,7 +143,6 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
               name="mobile_number"
               className={styles.body__input}
               placeholder={client.mobile_number}
-              value={state.mobile_number}
               onChange={(e) => onChange(e)} // this is where the logic of adding new values in state
             />
           ) : (
@@ -163,7 +157,6 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
               name="bills"
               className={styles.body__input}
               placeholder={client.bills ? client.bills.toString() : undefined}
-              value={state.bills}
               onChange={(e) => onChange(e)} // this is where the logic of adding new values in state
             />
           ) : (

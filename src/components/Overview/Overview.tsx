@@ -53,9 +53,10 @@ const Overview = (props: any) => {
   const springs = useSprings(
     items.length,
     items.map((_, index) => ({
-      transform: `translateY(${hover === index ? '-20px' : '0px'})`,
+      transform: `translateY(${hover === index ? '-20px' : '0px'}) scale(${
+        hover === index ? '1.1' : '1'
+      })`,
       background: hover === index ? 'white' : '#e0e2db',
-      borderRadius: hover === index ? '10px' : '0px',
       color: 'white',
       config: myConfig,
     }))
