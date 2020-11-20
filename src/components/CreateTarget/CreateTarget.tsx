@@ -34,8 +34,6 @@ const CreateTarget = (props: any) => {
       gender: '',
       paid: false,
     });
-
-    props.ClientsAction();
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -126,6 +124,4 @@ const mapStateToProps = (state: any) => {
     state,
   };
 };
-export default connect(mapStateToProps, { CreateClientAction, ClientsAction })(
-  CreateTarget
-);
+export default connect(mapStateToProps, { CreateClientAction })(CreateTarget);
