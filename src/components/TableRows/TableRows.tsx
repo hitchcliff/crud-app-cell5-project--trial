@@ -45,8 +45,12 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.currentTarget;
-    const value = target.value;
+    let value;
     const name = target.name;
+
+    if (name === 'bills') {
+      value = parseInt(target.value);
+    }
 
     set({ [name]: value });
   };
@@ -63,6 +67,7 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
     const found = data?.find((item: Client) => {
       return item._id === _id;
     });
+
     const newBody = { ...found, ...state };
     dispatch(UpdateClientAction(newBody)); // [DISPATCH]
   };

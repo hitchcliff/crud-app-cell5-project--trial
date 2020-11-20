@@ -54,9 +54,7 @@ export const ClientsReducer = (
 
     case DELETE_CLIENT: {
       const id = action.payload;
-      const clients = [...state.clients].filter(
-        (item: Client) => item._id !== id
-      );
+      const clients = [...state.clients].filter((item: Client) => item._id !== id);
       return {
         ...state,
         ...updateClientState(clients),
@@ -68,6 +66,10 @@ export const ClientsReducer = (
       const filteredData: any = [...state.clients].filter(
         (item) => item._id !== client._id
       );
+
+      console.log(client);
+      console.log(filteredData);
+
       const clients = [...filteredData, client];
 
       return {
