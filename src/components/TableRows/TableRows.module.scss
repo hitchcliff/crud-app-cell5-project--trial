@@ -20,48 +20,21 @@
   }
 
   &__actions {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     grid-gap: 5px;
-    justify-content: center;
-    align-items: center;
 
     // buttons styles
-    .edit,
-    .save,
-    .delete,
-    .paid,
-    .unPaid {
-      padding: 7px;
-      border-radius: 2px;
-    }
-    .edit {
-      background: none;
-      color: white;
-    }
-    .save {
-      background: $color3;
-      color: $color1;
-      font-weight: bold;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
-    }
-    .delete {
-      background: $color5;
-      color: white;
-      font-weight: bold;
-    }
-    .paid {
-      background: $color3;
-      color: white;
-    }
-    .unpaid {
-      background: none;
+    button {
+      background: white;
+      padding: 5px;
     }
   }
 }
 
+// ******* The color of the Table Rows when they are completed
 .body[data-color='completed'] {
-  background: $color3;
+  background: $color4;
   td {
     color: $color1;
   }
