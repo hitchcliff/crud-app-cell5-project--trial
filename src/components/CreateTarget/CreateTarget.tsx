@@ -6,34 +6,83 @@ import Buttons from '../Buttons/Buttons';
 import { connect } from 'react-redux';
 import { EditableTable } from '../TableRows';
 
-import { ClientsAction } from '../../Actions/clients.action';
 import { CreateClientAction } from '../../Actions/create.action';
+import { isEmpty, isGender, isNumber, isString } from '../../helpers/helpers';
+
+const defaultState = {
+  first_name: '',
+  last_name: '',
+  mobile_number: '',
+  bills: '',
+  gender: '',
+  paid: false, // by default, newly added clients are `not` paid
+};
+
 /**
  * Functional react component for congratulatory message.
  * @function
  * @returns {JSX.Element} - Rendered component (or null if `success` prop is missing)
  */
 const CreateTarget = (props: any) => {
-  const [state, set] = useState<EditableTable | null>({
-    first_name: '',
-    last_name: '',
-    mobile_number: '',
-    bills: '',
-    gender: '',
-    paid: false, // by default, newly added clients are `not` paid
-  });
+  const [state, set] = useState<EditableTable | null>(defaultState);
+  const [error, setError] = useState<EditableTable | null>(defaultState);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    props.CreateClientAction(state);
-    set({
+  /**
+   * A function that validates the form inputs.
+   * It sets the `error` in state based on the passed `obj`
+   * @function
+   * @param obj - Takes a type `EditableTable | null` as `args`
+   * @returns {boolean} - Returns either tru or false
+   */
+  const validate = (obj: EditableTable | null) => {
+    const errors: EditableTable = {
       first_name: '',
       last_name: '',
       mobile_number: '',
       bills: '',
       gender: '',
-      paid: false,
-    });
+    };
+
+    if (isEmpty(obj?.first_name)) {
+      errors.first_name = 'should not be empty';
+    }
+
+    if (isEmpty(obj?.last_name)) {
+      errors.last_name = 'should not be empty';
+    }
+
+    if (isEmpty(obj?.mobile_number)) {
+      errors.mobile_number = 'should not be empty';
+    }
+
+    if (isEmpty(obj?.bills) || !isNumber(obj?.bills)) {
+      errors.bills = 'bills must be a number';
+    }
+
+    if (isEmpty(obj?.gender) || isGender(obj?.gender)) {
+      errors.gender = 'gender must be either male or female';
+    }
+
+    setError(errors);
+    if (
+      errors.bills !== '' ||
+      errors.first_name !== '' ||
+      errors.last_name !== '' ||
+      errors.gender !== '' ||
+      errors.mobile_number !== ''
+    )
+      return false;
+    return true;
+  };
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const isValid = validate(state);
+    console.log(error, isValid);
+    if (isValid) return;
+
+    props.CreateClientAction(state);
+    set(defaultState); // simple reset once form submit
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
