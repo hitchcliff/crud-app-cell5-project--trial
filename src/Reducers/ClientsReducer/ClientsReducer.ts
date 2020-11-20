@@ -67,9 +67,6 @@ export const ClientsReducer = (
         (item) => item._id !== client._id
       );
 
-      console.log(client);
-      console.log(filteredData);
-
       const clients = [...filteredData, client];
 
       return {
