@@ -10,6 +10,7 @@
 ## Installation
 
 - Clone the repository
-- Install all `dep` through running `yarn install` or `similar`
-- Change Directory to Server & in the Root Level
-- Run `yarn start` or `similar` in the terminal
+- Install all `deps` through running `yarn install` or `similar` in the Server and Root
+- Run `yarn start` or `similar` in the terminal inside the `server` folder and `root`
+
+`Root` means the files inside the cloned repo.
