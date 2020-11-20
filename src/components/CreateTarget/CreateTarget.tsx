@@ -114,55 +114,70 @@ const CreateTarget = (props: any) => {
       {/* group__input is the `BEM` class to each Inputs */}
       <form onSubmit={(e) => onSubmit(e)}>
         <div className={styles.group}>
-          <input
-            data-test="input"
-            className={styles.group__input}
-            type="text"
-            name="first_name"
-            placeholder="First name"
-            value={state?.first_name}
-            onChange={(e) => onChange(e)}
-          />
-          <input
-            data-test="input"
-            className={styles.group__input}
-            type="text"
-            name="last_name"
-            placeholder="Last name"
-            value={state?.last_name}
-            onChange={(e) => onChange(e)}
-          />
+          <div>
+            <div className={styles.group__label}>{state.first_name_error}</div>
+            <input
+              data-test="input"
+              className={styles.group__input}
+              type="text"
+              name="first_name"
+              placeholder="First name"
+              value={state?.first_name}
+              onChange={(e) => onChange(e)}
+            />
+          </div>
+          <div>
+            <div className={styles.group__label}>{state.last_name_error}</div>
+            <input
+              data-test="input"
+              className={styles.group__input}
+              type="text"
+              name="last_name"
+              placeholder="Last name"
+              value={state?.last_name}
+              onChange={(e) => onChange(e)}
+            />
+          </div>
         </div>
         <div className={styles.group}>
-          <input
-            data-test="input"
-            className={styles.group__input}
-            type="text"
-            name="gender"
-            placeholder="Gender"
-            value={state?.gender}
-            onChange={(e) => onChange(e)}
-          />
-          <input
-            data-test="input"
-            className={styles.group__input}
-            type="text"
-            name="mobile_number"
-            placeholder="Mobile"
-            value={state?.mobile_number}
-            onChange={(e) => onChange(e)}
-          />
+          <div>
+            <div className={styles.group__label}>{state.gender_error}</div>
+            <input
+              data-test="input"
+              className={styles.group__input}
+              type="text"
+              name="gender"
+              placeholder="Gender"
+              value={state?.gender}
+              onChange={(e) => onChange(e)}
+            />
+          </div>
+          <div>
+            <div className={styles.group__label}>{state.mobile_error}</div>
+            <input
+              data-test="input"
+              className={styles.group__input}
+              type="text"
+              name="mobile_number"
+              placeholder="Mobile"
+              value={state?.mobile_number}
+              onChange={(e) => onChange(e)}
+            />
+          </div>
         </div>
         <div className={styles.group}>
-          <input
-            data-test="input"
-            className={styles.group__input}
-            type="number"
-            name="bills"
-            placeholder="Bills"
-            value={state?.bills}
-            onChange={(e) => onChange(e)}
-          />
+          <div>
+            <div className={styles.group__label}>{state.bills_error}</div>
+            <input
+              data-test="input"
+              className={styles.group__input}
+              type="number"
+              name="bills"
+              placeholder="Bills"
+              value={state?.bills}
+              onChange={(e) => onChange(e)}
+            />
+          </div>
           <Buttons isTypeSubmit text="Submit" />
         </div>
       </form>
