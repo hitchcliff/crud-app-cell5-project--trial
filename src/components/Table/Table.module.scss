@@ -1,7 +1,6 @@
 @import '../../styles/global';
 .table {
-  padding: 0 50px;
-  padding-right: 40px;
+  margin-top: $smallSeparator;
   max-height: 400px;
   overflow-y: scroll;
 
@@ -11,14 +10,12 @@
     height: 5px;
   }
 
-  &:hover {
-    &::-webkit-scrollbar {
-      background: white;
-    }
-    &::-webkit-scrollbar-thumb {
-      background: $color3;
-      border-radius: 10px;
-    }
+  &::-webkit-scrollbar {
+    background: none;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $color3;
+    border-radius: 10px;
   }
 
   &__container {

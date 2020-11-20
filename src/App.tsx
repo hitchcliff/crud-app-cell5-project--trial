@@ -16,7 +16,7 @@ const App = () => {
           <Overview />
           <Table />
           <div className="overview__button">
-            <Buttons isPrimary text="See more (1)" />
+            <Buttons text="View all" />
           </div>
         </div>
       </div>
