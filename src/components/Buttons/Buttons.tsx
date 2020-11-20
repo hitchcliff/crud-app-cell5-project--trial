@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { useSpring, animated } from 'react-spring';
 
 export const myConfig = {
-  mass: 16,
+  mass: 10,
   tension: 150,
   friction: 26,
 };

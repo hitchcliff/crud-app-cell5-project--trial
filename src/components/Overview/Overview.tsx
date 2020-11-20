@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import styles from './Overview.module.scss';
 import PropTypes from 'prop-types';
 
@@ -9,6 +9,11 @@ import { RootStore } from '../../Store';
 // componentts
 import AccountSettings from '../AccountSettings/AccountSettings';
 import Card from '../Card/Card';
+
+// react spring
+import { useSprings, animated, useSpring } from 'react-spring';
+import { myConfig } from '../Buttons/Buttons';
+import { isWhiteSpaceLike } from 'typescript';
 
 export interface IOverviewProp {
   persons: number;
@@ -22,6 +27,59 @@ export interface IOverviewProp {
  */
 const Overview = (props: any) => {
   const { persons, billings, completed }: IOverviewProp = props;
+  const [hover, setHover] = useState<number | undefined>();
+
+  // static data
+  const items = [
+    {
+      title: 'Persons',
+      value: persons,
+    },
+    {
+      title: 'Billings',
+      value: billings,
+    },
+    {
+      title: 'Completed',
+      value: completed,
+    },
+  ];
+
+  /**
+   * This is springs used to map te switches to create
+   * each and every configs for each item instead of using `useSpring`
+   * @function
+   */
+  const springs = useSprings(
+    items.length,
+    items.map((_, index) => ({
+      transform: `scale(${hover === index ? `1.2` : `1`})`,
+      background: '#e0e2db',
+      borderRadius: hover === index ? '10px' : '0px',
+      color: 'white',
+      config: myConfig,
+    }))
+  );
+
+  /**
+   * Map all the items through the total springs we have
+   * so we can easily add a `style` to listed type items
+   * @function
+   * @returns {JSX.Element}
+   */
+  const springsMapItems = springs.map((spring, index) => {
+    return (
+      <animated.div
+        key={index}
+        style={{ ...spring }}
+        onMouseOver={() => setHover(index)}
+        onMouseOut={() => setHover(index)}
+      >
+        <Card title={`${items[index].title}`} value={items[index].value} />
+      </animated.div>
+    );
+  });
+
   return (
     <div className={styles.overview}>
       {/* short intro about the app */}
@@ -30,10 +88,10 @@ const Overview = (props: any) => {
         <div className={styles.heading__summary}>
           <h3>My clients billings and listings</h3>
           <p>
-            Contrary to popular belief, Lorem Ipsum is not simply random text.
-            It has roots in a piece of classical Latin literature from 45 BC,
-            making it over 2000 years old. Richard McClintock, a Latin professor
-            at Hampden-Sydney College in Virginia.
+            Contrary to popular belief, Lorem Ipsum is not simply random text. It has
+            roots in a piece of classical Latin literature from 45 BC, making it over 2000
+            years old. Richard McClintock, a Latin professor at Hampden-Sydney College in
+            Virginia.
           </p>
         </div>
 
@@ -47,11 +105,7 @@ const Overview = (props: any) => {
       {/* cards components that accepts title and value as props */}
       <div className={styles.cards}>
         <h2 className={styles.cards__title}>Overview</h2>
-        <div className={styles.cards__container}>
-          <Card title="Persons" value={persons} />
-          <Card title="Billings" value={billings} />
-          <Card title="Completed" value={completed} />
-        </div>
+        <div className={styles.cards__container}>{springsMapItems}</div>
       </div>
     </div>
   );
