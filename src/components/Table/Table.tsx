@@ -41,10 +41,10 @@ const Table = () => {
             <th>Actions</th>
           </tr>
 
-          {/* this component has a complicated logic involved */}
-          {/* each and every rows have 3 buttons */}
-          {/* delete, update, and toggle complete */}
-          {/* a good reason to detach this into small component */}
+          {/* this component has a complicated logic involved
+           each and every rows have 3 buttons
+           delete, update, and toggle complete
+           a good reason to detach this into small component */}
           <TableRows clients={clients} />
         </tbody>
       </table>
