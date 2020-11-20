@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styles from './CreateTarget.module.scss';
-import cx from 'classnames';
 
 import Buttons from '../Buttons/Buttons';
 
@@ -8,7 +7,7 @@ import { connect } from 'react-redux';
 import { EditableTable } from '../TableRows';
 
 import { CreateClientAction } from '../../Actions/create.action';
-import { isEmpty, isGender, isNumber, isString } from '../../helpers/helpers';
+import { isEmpty, isGender, isNumber } from '../../helpers/helpers';
 import InputErrors from '../InputErrors/InputErrors';
 
 const defaultState: CreateTargetDefaultState = {
@@ -41,6 +40,7 @@ export interface CreateTargetDefaultState extends EditableTable {
  */
 const CreateTarget = (props: any) => {
   const [state, set] = useState<EditableTable | any>(defaultState);
+  const [errorStateAnimation, setErrorStateAnimation] = useState(false);
 
   /**
    * A function that validates the form inputs.
@@ -98,9 +98,17 @@ const CreateTarget = (props: any) => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // set show state animation
+    setErrorStateAnimation(true);
+
+    // keeping the animation fluid in other components
+    setTimeout(() => {
+      setErrorStateAnimation(!errorStateAnimation);
+    }, 300);
     if (validate()) {
       props.CreateClientAction(state);
       set(defaultState); // simple reset once form submit
+      setErrorStateAnimation(false);
     }
   };
 
@@ -190,18 +198,7 @@ const CreateTarget = (props: any) => {
       </form>
 
       {/* Input Errors */}
-      <InputErrors
-        state={
-          state.first_name_error ||
-          state.last_name_error ||
-          state.mobile_error ||
-          state.bills_error ||
-          state.gender_error
-            ? true
-            : false
-        }
-        errors={state}
-      />
+      <InputErrors state={errorStateAnimation} errors={state} />
     </div>
   );
 };

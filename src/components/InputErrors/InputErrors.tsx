@@ -1,6 +1,10 @@
 import React from 'react';
-import { CreateTargetDefaultState } from '../CreateTarget/CreateTarget';
 import styles from './InputErrors.module.scss';
+
+import { CreateTargetDefaultState } from '../CreateTarget/CreateTarget';
+
+import { myConfig } from '../Buttons/Buttons';
+import { useSpring, animated } from 'react-spring';
 interface IInputErrorsProp {
   errors: CreateTargetDefaultState;
   state: boolean;
@@ -18,13 +22,29 @@ const InputErrors = ({ errors, state }: IInputErrorsProp) => {
     gender_error,
     bills_error,
   } = errors;
+
+  const spring = useSpring({
+    transform: state ? `translateY(30px)` : `translateY(0px)`,
+    config: myConfig,
+  });
+
   return (
     <div className={styles.errors}>
-      <span className={styles.errors__first_name}>{first_name_error}</span>
-      <span className={styles.errors__last_name}>{last_name_error}</span>
-      <span className={styles.errors__mobile}>{mobile_error}</span>
-      <span className={styles.errors__gender}>{gender_error}</span>
-      <span className={styles.bills_error}>{bills_error}</span>
+      <animated.span style={spring} className={styles.error__first_name}>
+        {first_name_error}
+      </animated.span>
+      <animated.span style={spring} className={styles.errors__last_name}>
+        {last_name_error}
+      </animated.span>
+      <animated.span style={spring} className={styles.errors__mobile}>
+        {mobile_error}
+      </animated.span>
+      <animated.span style={spring} className={styles.errors__gender}>
+        {gender_error}
+      </animated.span>
+      <animated.span style={spring} className={styles.bills_error}>
+        {bills_error}
+      </animated.span>
     </div>
   );
 };
