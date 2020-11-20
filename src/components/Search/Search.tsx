@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { ClientsAction } from '../../Actions/clients.action';
 import { SearchClientAction } from '../../Actions/search.action';
 import styles from './Search.module.scss';
 /**
@@ -15,6 +16,8 @@ const Search = () => {
     const value = e.target.value;
     set(value);
     setTimeout(() => {
+      // if value is empty, call clientsaction
+      if (value === '') return dispatch(ClientsAction());
       dispatch(SearchClientAction(state));
     }, 1000);
   };
