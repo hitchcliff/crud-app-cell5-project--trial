@@ -19,6 +19,14 @@ interface ITableRowsProp {
   clients?: Client[];
 }
 
+const EditableTableObject = {
+  first_name: '',
+  last_name: '',
+  mobile_number: '',
+  bills: '',
+  gender: '',
+};
+
 /**
  * Functional react component for congratulatory message.
  * @function
@@ -26,17 +34,10 @@ interface ITableRowsProp {
  */
 const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
   const [currentIndex, setCurrentIndex] = useState<string | null>();
-  const [paid, setPaid] = useState<number | string>(); // used to toggle `paid` & `unpaid`
   const [data, setData] = useState<Client[]>();
   const dispatch = useDispatch();
 
-  const [state, set] = useState<EditableTable>({
-    first_name: '',
-    last_name: '',
-    mobile_number: '',
-    bills: '',
-    gender: '',
-  }); // new values temporarily stored
+  const [state, set] = useState<EditableTable>(EditableTableObject); // new values temporarily stored
 
   useEffect(() => {
     setData(clients);
@@ -56,6 +57,8 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
    */
   const onSave = (_id: string) => {
     setCurrentIndex(null); // reset
+    // if state is equal to our original `EdiitableTableObject`, then simply returns
+    if (state === EditableTableObject) return;
 
     const found = data?.find((item: Client) => {
       return item._id === _id;
