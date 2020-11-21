@@ -27,6 +27,7 @@ export interface IOverviewProp {
 const Overview = (props: any) => {
   const { persons, billings, completed }: IOverviewProp = props;
   const [hover, setHover] = useState<number | undefined>();
+  const [isHover, setIsHover] = useState<boolean>(false);
 
   // static data
   const items = [
@@ -52,10 +53,10 @@ const Overview = (props: any) => {
   const springs = useSprings(
     items.length,
     items.map((_, index) => ({
-      transform: `translateY(${hover === index ? '-20px' : '0px'}) scale(${
-        hover === index ? '1.1' : '1'
+      transform: `translateY(${hover === index && isHover ? '-20px' : '0px'}) scale(${
+        hover === index && isHover ? '1.1' : '1'
       })`,
-      background: hover === index ? 'white' : '#e0e2db',
+      background: hover === index && isHover ? 'white' : '#e0e2db',
       color: 'white',
       config: myConfig,
     }))
@@ -74,6 +75,8 @@ const Overview = (props: any) => {
         style={{ ...spring }}
         onMouseOver={() => setHover(index)}
         onMouseOut={() => setHover(index)}
+        onPointerEnter={() => setIsHover(true)}
+        onPointerLeave={() => setIsHover(false)}
       >
         <Card title={`${items[index].title}`} value={items[index].value} />
       </animated.div>
