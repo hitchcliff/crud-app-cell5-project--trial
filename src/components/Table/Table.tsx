@@ -24,7 +24,7 @@ const Table = () => {
     return () => {
       clearTimeout(req);
     };
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className={styles.table}>

@@ -8,8 +8,6 @@ import { BoxSwitches } from './data';
 import { useDispatch } from 'react-redux';
 
 import { useSprings, animated } from 'react-spring';
-import { config } from 'process';
-import { isTemplateExpression } from 'typescript';
 import { myConfig } from '../Buttons/Buttons';
 
 /**
@@ -49,17 +47,7 @@ const SortingOptions = () => {
     return () => {
       clearTimeout(res);
     };
-  }, [state]);
-
-  const handleClick = (id: number, item: IBoxSwitchesType) => {
-    setActive(id); // id = `0`, set active to `1`
-    set(item.dsc);
-
-    if (active === id) {
-      setActive(0); // id = `1`, set active to `0`
-      set(item.asc);
-    }
-  };
+  }, [state, dispatch]);
 
   /**
    * Map all the items through the total springs we have
@@ -68,6 +56,15 @@ const SortingOptions = () => {
    * @returns {JSX.Element}
    */
   const springsMapItems = useCallback(() => {
+    const handleClick = (id: number, item: IBoxSwitchesType) => {
+      setActive(id); // id = `0`, set active to `1`
+      set(item.dsc);
+
+      if (active === id) {
+        setActive(0); // id = `1`, set active to `0`
+        set(item.asc);
+      }
+    };
     return springs.map((spring, index) => {
       return (
         <div
@@ -92,7 +89,7 @@ const SortingOptions = () => {
         </div>
       );
     });
-  }, [springs]);
+  }, [springs, active]);
 
   return (
     <div data-test={`${active ? 'active' : ''}`} className={styles.sorting}>

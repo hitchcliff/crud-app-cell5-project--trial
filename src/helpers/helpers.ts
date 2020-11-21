@@ -1,5 +1,3 @@
-import { Client } from '../Actions/clients.action';
-
 /**
  * A Helper function that sits in Root to Format number
  * @function

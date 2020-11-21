@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { ClientsAction } from '../../Actions/clients.action';
 import { SearchClientAction } from '../../Actions/search.action';
 import styles from './Search.module.scss';

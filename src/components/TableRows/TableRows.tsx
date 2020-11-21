@@ -82,6 +82,7 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
 
   /**
    * Runs once user clicked `E`
+   * Runs `onSave` function if the passed `id` is equal to `currenIndex`
    * @param id - Accepts an `ID` as an argument
    */
   const onEdit = (id: string) => {
@@ -95,7 +96,7 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
   // Simply map the clients array from the server
   if (!data) return <></>;
   const mappingClients = [...data].map((client: Client, index: number) => {
-    if (client === null) return;
+    if (client === null) return null;
     return (
       <tr
         key={index}
