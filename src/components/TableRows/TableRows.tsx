@@ -14,7 +14,7 @@ import { UpdateClientAction } from '../../Actions/update.action';
 import { PaidClientAction } from '../../Actions/paid.action';
 import { UnPaidClientAction } from '../../Actions/unpaid.action';
 
-import { checkNumberValidation, FormatNumber } from '../../helpers/helpers';
+import { FormatNumber, validationCheck } from '../../helpers/helpers';
 
 interface ITableRowsProp {
   clients?: Client[];
@@ -73,7 +73,9 @@ const TableRows = ({ clients }: ITableRowsProp): JSX.Element => {
     });
 
     const newBody = { ...found, ...state };
-    const isValid = checkNumberValidation(newBody);
+
+    // check body if we have the expected types of inputs
+    const isValid = validationCheck(newBody);
     if (!isValid) return;
     dispatch(UpdateClientAction(newBody)); // [DISPATCH]
   };

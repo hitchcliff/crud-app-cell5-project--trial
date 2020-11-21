@@ -72,7 +72,19 @@ const isNumeric = (value: any) => {
  * @param state - Accepts a `state` that has a type of `Client` as an args.
  * @returns - This returns `true` or `false` if we are going to proceed dispatching action
  */
-export const checkNumberValidation = (state: any) => {
-  const { bills } = state;
-  return isNumeric(bills);
+export const validationCheck = (state: any) => {
+  const { bills, gender } = state;
+  let genderError = '';
+  let billsError = '';
+
+  if (!isGender(gender)) {
+    genderError = 'gender should be male or female';
+  }
+
+  if (!isNumeric(bills)) {
+    billsError = 'bills should be a number';
+  }
+
+  if (genderError || billsError) return false;
+  return true;
 };

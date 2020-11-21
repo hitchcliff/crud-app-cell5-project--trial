@@ -7,12 +7,8 @@
   box-shadow: $boxShadow;
   border-radius: 5px;
   cursor: pointer;
-  // transition: all 0.3s ease;
-  // &:hover {
-  //   transform: translate3d(0, -5px, 0);
-  //   border-radius: 0;
-  // }
 }
+
 .primary {
   background: $color3;
   color: $color1;

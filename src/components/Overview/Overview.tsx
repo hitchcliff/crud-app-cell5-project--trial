@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './Overview.module.scss';
 import PropTypes from 'prop-types';
 
@@ -11,9 +11,8 @@ import AccountSettings from '../AccountSettings/AccountSettings';
 import Card from '../Card/Card';
 
 // react spring
-import { useSprings, animated, useSpring } from 'react-spring';
+import { useSprings, animated } from 'react-spring';
 import { myConfig } from '../Buttons/Buttons';
-import { isWhiteSpaceLike } from 'typescript';
 
 export interface IOverviewProp {
   persons: number;
