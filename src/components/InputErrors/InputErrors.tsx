@@ -29,19 +29,39 @@ const InputErrors = ({ errors, state }: IInputErrorsProp) => {
 
   return (
     <div className={styles.errors}>
-      <animated.span style={spring} className={styles.error__first_name}>
+      <animated.span
+        data-testid="first-name-err"
+        style={spring}
+        className={styles.error__first_name}
+      >
         {first_name_error}
       </animated.span>
-      <animated.span style={spring} className={styles.errors__last_name}>
+      <animated.span
+        data-testid="last-name-err"
+        style={spring}
+        className={styles.errors__last_name}
+      >
         {last_name_error}
       </animated.span>
-      <animated.span style={spring} className={styles.errors__mobile}>
+      <animated.span
+        data-testid="mobile-number-err"
+        style={spring}
+        className={styles.errors__mobile}
+      >
         {mobile_error}
       </animated.span>
-      <animated.span style={spring} className={styles.errors__gender}>
+      <animated.span
+        data-testid="gender-err"
+        style={spring}
+        className={styles.errors__gender}
+      >
         {gender_error}
       </animated.span>
-      <animated.span style={spring} className={styles.bills_error}>
+      <animated.span
+        data-testid="bills-err"
+        style={spring}
+        className={styles.bills_error}
+      >
         {bills_error}
       </animated.span>
     </div>
