@@ -45,7 +45,12 @@ export const ClientsReducer = (
     }
 
     case CREATE_CLIENT: {
-      const clients = [...state.clients, action.payload];
+      let clients;
+      if (!state.clients) {
+        clients = [action.payload];
+      } else {
+        clients = [...state.clients, action.payload];
+      }
       return {
         ...state,
         ...updateClientState(clients),
@@ -54,6 +59,7 @@ export const ClientsReducer = (
 
     case DELETE_CLIENT: {
       const id = action.payload;
+      if (!state.clients) return;
       const clients = [...state.clients].filter((item: Client) => item._id !== id);
       return {
         ...state,
@@ -63,9 +69,12 @@ export const ClientsReducer = (
 
     case UPDATE_CLIENT: {
       const client = action.payload; // new body
-      const filteredData: any = [...state.clients].filter(
-        (item) => item._id !== client._id
-      );
+      let filteredData: any;
+      if (!state.clients) {
+        filteredData = [];
+      } else {
+        filteredData = [...state.clients].filter((item) => item._id !== client._id);
+      }
 
       const clients = [...filteredData, client];
 
@@ -91,6 +100,7 @@ export const ClientsReducer = (
 
     case PAID_CLIENT: {
       const _id = action.payload;
+      if (!state.clients) return;
       return {
         ...state,
         ...updatePaymentClientState(_id, [...state.clients], true),
@@ -99,6 +109,7 @@ export const ClientsReducer = (
 
     case UNPAID_CLIENT: {
       const _id = action.payload;
+      if (!state.clients) return;
       return {
         ...state,
         ...updatePaymentClientState(_id, [...state.clients], false),

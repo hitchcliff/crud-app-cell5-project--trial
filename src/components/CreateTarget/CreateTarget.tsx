@@ -141,6 +141,7 @@ const CreateTarget = (props: any) => {
         <div className={styles.group}>
           {/* actual input */}
           <input
+            data-testid="target-input"
             className={styles.group__input}
             type="text"
             name="first_name"
@@ -150,7 +151,7 @@ const CreateTarget = (props: any) => {
           />
           {/* actual input */}
           <input
-            data-test="input"
+            data-testid="target-input"
             className={styles.group__input}
             type="text"
             name="last_name"
@@ -162,6 +163,7 @@ const CreateTarget = (props: any) => {
         <div className={styles.group}>
           {/* actual input */}
           <input
+            data-testid="target-input"
             className={styles.group__input}
             type="text"
             name="gender"
@@ -171,6 +173,7 @@ const CreateTarget = (props: any) => {
           />
           {/* actual input */}
           <input
+            data-testid="target-input"
             className={styles.group__input}
             type="text"
             name="mobile_number"
@@ -182,6 +185,7 @@ const CreateTarget = (props: any) => {
         <div className={styles.group}>
           {/* actual input */}
           <input
+            data-testid="target-input"
             className={styles.group__input}
             type="number"
             name="bills"

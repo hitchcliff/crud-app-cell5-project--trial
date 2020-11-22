@@ -3,7 +3,7 @@ import styles from './Overview.module.scss';
 import PropTypes from 'prop-types';
 
 // redux
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootStore } from '../../Store';
 
 // componentts
@@ -24,24 +24,24 @@ export interface IOverviewProp {
  * @function
  * @returns {JSX.Element} - Rendered component (or null if `success` prop is missing)
  */
-const Overview = (props: any) => {
-  const { persons, billings, completed }: IOverviewProp = props;
-  const [hover, setHover] = useState<number | undefined>();
+const Overview = () => {
+  const listings = useSelector((state: RootStore) => state.listings);
+  const [hover, setHover] = useState<number>();
   const [isHover, setIsHover] = useState<boolean>(false);
 
   // static data
   const items = [
     {
       title: 'Persons',
-      value: persons,
+      value: listings?.persons,
     },
     {
       title: 'Billings',
-      value: billings,
+      value: listings?.billings,
     },
     {
       title: 'Completed',
-      value: completed,
+      value: listings?.completed,
     },
   ];
 
@@ -122,12 +122,4 @@ Overview.propTypes = {
   }),
 };
 
-const mapStateToProps = (state: RootStore) => {
-  return {
-    persons: state.listings.persons,
-    billings: state.listings.billings,
-    completed: state.listings.completed,
-  };
-};
-
-export default connect(mapStateToProps)(Overview);
+export default Overview;

@@ -1,12 +1,12 @@
-import React from 'react';
+import { RenderResult, fireEvent } from '@testing-library/react';
+import * as React from 'react';
 import CreateTarget from '../CreateTarget';
-
-import { RenderResult } from '@testing-library/react';
 
 import { setup, storeFactory } from '../../../test/helper';
 import { Provider } from 'react-redux';
 
-describe('CreateTarget componentn', () => {
+describe('CreateTarget componennt', () => {
+  const inputElement = 'target-input';
   let wrapper: RenderResult;
   beforeEach(() => {
     const store = storeFactory({});
@@ -21,8 +21,9 @@ describe('CreateTarget componentn', () => {
     expect(wrapper).toBeTruthy();
   });
 
-  test('test text if exist', () => {
-    const { getByText } = wrapper;
-    getByText('Add new target');
+  it('should render all 5 input elements', () => {
+    const { getAllByTestId } = wrapper;
+    const input = getAllByTestId(inputElement);
+    expect(input.length).toBe(5);
   });
 });

@@ -13,7 +13,7 @@ import { RootStore } from '../../Store';
  * @returns {JSX.Element} - Rendered component (o null if `success` prop is missing)
  */
 const Table = () => {
-  const { clients } = useSelector((item: RootStore) => item.listings);
+  const state = useSelector((item: RootStore) => item.listings);
   const dispatch = useDispatch();
 
   // fetch the the `clients` here to avoid confusion in `TableRows` component
@@ -45,7 +45,7 @@ const Table = () => {
            each and every rows have 3 buttons
            delete, update, and toggle complete
            a good reason to detach this into small component */}
-          <TableRows clients={clients} />
+          <TableRows clients={state?.clients} />
         </tbody>
       </table>
     </div>
