@@ -25,7 +25,6 @@ const Search = () => {
     <div className={styles.search}>
       {/* a search input that has a `BEM` naming convention */}
       <input
-        data-test="input"
         className={styles.search__input}
         name="s"
         type="text"

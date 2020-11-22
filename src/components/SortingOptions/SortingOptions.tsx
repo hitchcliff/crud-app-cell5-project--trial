@@ -68,7 +68,6 @@ const SortingOptions = () => {
     return springs.map((spring, index) => {
       return (
         <div
-          data-test="box"
           key={index}
           className={styles.box}
           // set the state for currently hovered item
@@ -77,7 +76,6 @@ const SortingOptions = () => {
         >
           <p>{BoxSwitches[index].title}</p>
           <animated.button
-            data-test="button"
             className={
               active === BoxSwitches[index].id
                 ? styles.box__switchActive
@@ -92,7 +90,7 @@ const SortingOptions = () => {
   }, [springs, active]);
 
   return (
-    <div data-test={`${active ? 'active' : ''}`} className={styles.sorting}>
+    <div className={styles.sorting}>
       {/* heading */}
       <h4>Sorting options</h4>
 

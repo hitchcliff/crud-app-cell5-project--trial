@@ -1,26 +1,18 @@
 import React from 'react';
 import App from './App';
 
-// enzyme
-import { shallow, ShallowWrapper } from 'enzyme';
+import { Provider } from 'react-redux';
+import { setup, storeFactory } from './test/helper';
 
-/**
- * Function that return shallow `component`
- * @returns {ShallowWrapper}
- */
-const setup = () => {
-  const wrapper = shallow(<App />);
-  return wrapper;
-};
+describe('App component', () => {
+  test('should render correctly', () => {
+    const store = storeFactory({});
+    const wrapper = setup(
+      <Provider store={store}>
+        <App />
+      </Provider>
+    );
 
-describe('App component tests', () => {
-  let wrapper: ShallowWrapper;
-
-  beforeEach(() => {
-    wrapper = setup();
-  });
-
-  test('should render without error', () => {
-    expect(wrapper.length).toBe(1);
+    expect(wrapper).toBeTruthy();
   });
 });

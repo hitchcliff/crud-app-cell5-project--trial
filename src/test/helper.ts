@@ -1,21 +1,19 @@
-import { ReactWrapper, ShallowWrapper } from 'enzyme';
+// redux
 import { applyMiddleware, createStore } from 'redux';
-import RootReducer from '../Reducers';
 import { middleware } from '../Store';
+import RootReducer from '../Reducers';
+
+// testing
+import { render, RenderResult } from '@testing-library/react';
 
 /**
- * A function that searches throughout shallow component
+ * A function that renders the component to be used in testing
  * @function
- * @param {ShallowWrapper} wrapper - Shalow component
- * @param {string} value - Accepts `value` we need to find within
- * @returns {ShallowWrapper} - Returns the `element`
+ * @param component - Accepts a `JSX.Element` and `any` type
+ * @return - Returns the rendered component from `testing-library/react`
  */
-export const findByTestAttr = (
-  wrapper: ShallowWrapper | ReactWrapper,
-  value: string
-) => {
-  const component = wrapper.find(`[data-test="${value}"]`);
-  return component;
+export const setup = (component: any): RenderResult => {
+  return render(component);
 };
 
 /**
