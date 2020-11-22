@@ -69,7 +69,7 @@ const CreateTarget = (props: any) => {
       mobile_error = 'mobile number ' + empty;
     }
     if (isEmpty(state?.gender) || !isGender(state?.gender)) {
-      gender_error = 'gender should be mail or female';
+      gender_error = 'gender should be male or female';
     }
 
     if (isEmpty(state?.bills) || !isNumber(state?.bills)) {
@@ -137,7 +137,7 @@ const CreateTarget = (props: any) => {
 
       {/* form is the wrapper. group is the one who holds our inputs*/}
       {/* group__input is the `BEM` class to each Inputs */}
-      <form onSubmit={(e) => onSubmit(e)}>
+      <form data-testid="form" onSubmit={(e) => onSubmit(e)}>
         <div className={styles.group}>
           {/* actual input */}
           <input

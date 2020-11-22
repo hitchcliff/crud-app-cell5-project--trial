@@ -26,3 +26,19 @@ export const storeFactory = (initialState: any) => {
   const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore);
   return createStoreWithMiddleware(RootReducer, initialState);
 };
+
+/**
+ * A function that checks the input value whether `true` or `false` has
+ * that value
+ * @function
+ * @param e - Accepts an HTMLElement
+ * @param inputValue - The string you needed to match
+ * @param wrapper - The actual `wrapper` or return value from `render`
+ */
+export const hasInputValue = (
+  e: HTMLElement,
+  inputValue: string,
+  wrapper: RenderResult
+) => {
+  return wrapper.getByDisplayValue(inputValue) === e;
+};

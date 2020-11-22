@@ -40,6 +40,7 @@ const Buttons = ({
   });
   return (
     <animated.button
+      data-testid="button-submit"
       style={spring}
       type={isTypeSubmit ? 'submit' : undefined}
       className={isPrimary ? styles.primary : styles.general}
